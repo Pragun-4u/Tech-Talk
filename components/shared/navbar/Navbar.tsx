@@ -1,10 +1,10 @@
-import { SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Theme from "./Theme";
 import MobileNav from "./MobileNav";
 import MainSearch from "../search/MainSearch";
+import SignedInClerk from "./SignedInClerk";
 
 const Navbar = () => {
   return (
@@ -17,25 +17,14 @@ const Navbar = () => {
             height={32}
             alt="Tech Talk"
           />
-          <p className="h2-bold       font-spaceGrotesk  text-base  text-dark-200 dark:text-white md:block md:text-2xl">
+          <p className="h2-bold font-spaceGrotesk  text-base  text-dark-200 dark:text-white md:block md:text-2xl">
             Tech <span className="text-primary-500">Talk</span>
           </p>
         </Link>
         <MainSearch />
         <div className="flex-between gap-5">
           <Theme />
-          <SignedIn>
-            <div>
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{
-                  elements: { avatarBox: "h-6 w-6  md:h-10 md:w-10" },
-                  variables: { colorPrimary: "#fff017" },
-                }}
-              />
-            </div>
-          </SignedIn>
-
+          <SignedInClerk />
           <MobileNav />
         </div>
       </nav>

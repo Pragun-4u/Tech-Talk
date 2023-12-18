@@ -15,7 +15,7 @@ import { useTheme } from "@/context/ThemeProvider";
 import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 
-const MobileNavItems = () => {
+export const NavItems = () => {
   const pathname = usePathname();
 
   return (
@@ -42,7 +42,11 @@ const MobileNavItems = () => {
                 alt={item.label}
                 className={`${isActive ? "" : "invert-colors"}`}
               />
-              <span className={`${isActive ? "base-bold" : "base-medium"}`}>
+              <span
+                className={`md:hidden lg:block ${
+                  isActive ? "base-bold" : "base-medium"
+                }`}
+              >
                 {item.label}
               </span>
             </Link>
@@ -66,7 +70,7 @@ const MobileNav = () => {
           className={`sm:hidden ${mode === "light" ? "invert" : ""}`}
         />
       </SheetTrigger>
-      <SheetContent side={"left"}>
+      <SheetContent side={"left"} className="overflow-scroll">
         <Link href="/" className="flex items-center gap-1">
           <Image
             src="assets/images/Hero-logo.svg"
@@ -79,14 +83,13 @@ const MobileNav = () => {
           </p>
         </Link>
         <SheetClose asChild>
-          <MobileNavItems />
+          <NavItems />
         </SheetClose>
-
         <SignedOut>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 pt-10">
             <SheetClose asChild>
               <Link href="/sign-in">
-                <Button className="small-medium btn-secondary min-h-[50px] w-full rounded-lg  px-10">
+                <Button className="small-medium btn-secondary  min-h-[50px] w-full rounded-lg  px-10">
                   <span className="primary-text-gradient text-dark400_light900">
                     Log In
                   </span>

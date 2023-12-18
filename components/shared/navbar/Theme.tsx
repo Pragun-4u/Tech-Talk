@@ -17,7 +17,7 @@ const Theme = () => {
 
   return (
     <Menubar
-      className={`relative border-none  shadow-none hover:cursor-pointer ${
+      className={`relative flex w-16 items-center space-x-1 rounded-md border border-none border-slate-200 bg-transparent p-1 shadow-none dark:border-slate-800 dark:bg-transparent ${
         mode === "dark" ? "text-white" : "text-black "
       } `}
     >
