@@ -2,7 +2,6 @@ import React from "react";
 import { NavItems } from "../navbar/MobileNav";
 import { Sheet, SheetClose } from "@/components/ui/sheet";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 

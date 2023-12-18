@@ -4,6 +4,13 @@ export interface SidebarLink {
   route: string;
   label: string;
 }
+// export interface Tagstype {
+//   value: String;
+//   totalQuestion: Number;
+// }
+export interface rightsidebar {
+  value: String;
+}
 export interface Job {
   id?: string;
   employer_name?: string;
