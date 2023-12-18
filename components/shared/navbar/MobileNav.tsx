@@ -19,7 +19,7 @@ export const NavItems = () => {
   const pathname = usePathname();
 
   return (
-    <section className="flex h-full flex-col gap-6 pt-16">
+    <section className="-mt-10 flex h-full flex-col gap-4 pt-16 md:mt-0 md:gap-6">
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
@@ -33,7 +33,7 @@ export const NavItems = () => {
                 isActive
                   ? "primary-gradient rounded-lg text-light-900"
                   : "text-dark300_light900"
-              } flex items-center justify-center gap-4 bg-transparent p-4`}
+              } flex items-center justify-center gap-4 bg-transparent p-3 py-2 lg:py-3`}
             >
               <Image
                 src={item.imgURL}
@@ -86,7 +86,7 @@ const MobileNav = () => {
           <NavItems />
         </SheetClose>
         <SignedOut>
-          <div className="flex flex-col gap-5 pt-10">
+          <div className="-mt-28 flex flex-col gap-5 md:pt-10 ">
             <SheetClose asChild>
               <Link href="/sign-in">
                 <Button className="small-medium btn-secondary  min-h-[50px] w-full rounded-lg  px-10">

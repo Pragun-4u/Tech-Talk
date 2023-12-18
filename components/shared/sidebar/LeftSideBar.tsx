@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const LeftSideBar = () => {
   return (
-    <div className="custom-scrollbar relative hidden h-full overflow-y-scroll  pt-12 md:block md:w-20 lg:w-64">
+    <div className=" relative hidden h-full overflow-hidden  pt-12 md:block md:w-20 lg:w-64">
       <Sheet>
         <NavItems />
         <SignedOut>
