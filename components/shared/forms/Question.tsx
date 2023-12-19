@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/Server Actions/Question.action";
 
 const btnText: string = "Create";
 
@@ -37,12 +38,14 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionType>) {
+  async function onSubmit(values: z.infer<typeof QuestionType>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     // console.log(values);
     try {
       setisSubmitting(true);
+      await createQuestion();
+      alert("SUBMITTED");
     } catch (error) {
     } finally {
       setisSubmitting(false);
@@ -148,6 +151,8 @@ const Question = () => {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue="Start describing your Question here."
                   init={{
                     height: 300,
