@@ -20,13 +20,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { createQuestion } from "@/lib/Server Actions/Question.action";
+import { createQuestion } from "@/lib/ServerActions/Question.action";
+import { useRouter } from "next/navigation";
 
 const btnText: string = "Create";
 
-const Question = () => {
+const Question = ({ mongoUserId }: { mongoUserId: string }) => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [isSubmitting, setisSubmitting] = useState(false);
+
+  const router = useRouter();
+  // const pathname = usePathname();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionType>>({
     resolver: zodResolver(QuestionType),
@@ -44,9 +49,20 @@ const Question = () => {
     // console.log(values);
     try {
       setisSubmitting(true);
-      await createQuestion();
+      await createQuestion({
+        title: values.Title,
+        description: values.Description,
+        tags: values.Tags,
+        author: JSON.parse(mongoUserId),
+      });
+
       alert("SUBMITTED");
+
+      // navigate to home Page
+
+      router.push("/");
     } catch (error) {
+      console.log(error);
     } finally {
       setisSubmitting(false);
     }
