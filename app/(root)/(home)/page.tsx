@@ -17,12 +17,12 @@ const Question = [
       { $oid: "658e12221c2b885a72540548" },
       { $oid: "658e12221c2b885a72540561" },
     ],
-    views: { $numberInt: "0" },
+    views: 123456789,
     upvotes: [],
     downvotes: [],
     author: { $oid: "658e0dc1f0cc0bc27b2b050b" },
     answers: [],
-    createdAt: { $date: { $numberLong: "1703809570022" } },
+    createdAt: new Date("2023-01-01T12:00:00Z"),
     __v: { $numberInt: "0" },
   },
   {
@@ -34,12 +34,12 @@ const Question = [
       { $oid: "658e12221c2b885a72540548" },
       { $oid: "658e12221c2b885a72540561" },
     ],
-    views: { $numberInt: "0" },
+    views: 123456789,
     upvotes: [],
     downvotes: [],
     author: { $oid: "658e0dc1f0cc0bc27b2b050b" },
     answers: [],
-    createdAt: { $date: { $numberLong: "1703809570022" } },
+    createdAt: new Date("2023-01-01T12:00:00Z"),
     __v: { $numberInt: "0" },
   },
 ];
@@ -78,7 +78,8 @@ export default function Home() {
               title={q.title}
               tags={q.tags}
               author={q.author}
-              upvotes={q.upvotes}
+              upvotes={13456}
+              answer={165435}
               views={q.views}
               createdAt={q.createdAt}
             />

@@ -24,15 +24,16 @@ const RightSideBar = () => {
         ))}
       </div>
       <div className=" mt-6 flex flex-col">
-        <p className="h3-bold text-dark400_light900 px-8 pb-2">Popular Tags</p>
+        <p className="h3-bold text-dark400_light900  px-8 pb-2">Popular Tags</p>
         {tags?.map((tag) => (
-          <Tags
-            key={tag._id}
-            _id={tag._id}
-            value={tag.value}
-            totalQuestion={tag.totalQuestion}
-            showCount
-          />
+          <div className="flex flex-col" key={tag._id}>
+            <Tags
+              _id={tag._id}
+              value={tag.value}
+              totalQuestion={tag.totalQuestion}
+              showCount
+            />
+          </div>
         ))}
       </div>
     </div>
