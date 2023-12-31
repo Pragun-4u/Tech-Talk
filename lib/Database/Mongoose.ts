@@ -15,7 +15,7 @@ export async function ConnectToDB() {
 
   try {
     await mongoose.connect(process.env.MONGODB_URL, {
-      dbName: "Tech Talk",
+      dbName: "TechTalk",
     });
     isConnected = true;
     console.log("Mongo DB connected");
