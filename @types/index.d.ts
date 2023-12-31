@@ -32,6 +32,25 @@ export interface Country {
 export interface ParamsProps {
   params: { id: string };
 }
+
+export interface questionType {
+  _id: string;
+  title: string;
+  tags: {
+    _id: string;
+    __v: number;
+    createdOn: Date;
+    followers: [];
+    name: string;
+    question: [];
+  }[];
+  author: { $oid: string };
+  upvotes: number;
+  views: number;
+  answer: number;
+  createdAt: Date;
+}
+
 export interface SearchParamsProps {
   searchParams: { [key: string]: string | undefined };
 }

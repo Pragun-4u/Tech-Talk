@@ -4,8 +4,26 @@
 import Question from "@/database/Question.model";
 import { ConnectToDB } from "../Database/Mongoose";
 import Tag from "@/database/Tag.model";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import User from "@/database/User.model";
+import { revalidatePath } from "next/cache";
 
-export async function createQuestion(params: any) {
+export async function getQuestions(params: GetQuestionsParams) {
+  try {
+    ConnectToDB();
+    const allQuestions = await Question.find({})
+      .populate({ path: "tags", model: Tag })
+      .populate({ path: "author", model: User })
+      .sort({ createdAt: -1 });
+
+    return { allQuestions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     ConnectToDB();
     const { title, description, author, path, tags } = params;
@@ -41,6 +59,8 @@ export async function createQuestion(params: any) {
     await Question.findByIdAndUpdate(question._id, {
       $push: { tags: { $each: tagDocuments } },
     });
+
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
   }

@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/ServerActions/Question.action";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const btnText: string = "Create";
 
@@ -30,7 +30,7 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
   const [isSubmitting, setisSubmitting] = useState(false);
 
   const router = useRouter();
-  // const pathname = usePathname();
+  const pathname = usePathname();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionType>>({
@@ -54,6 +54,7 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
         description: values.Description,
         tags: values.Tags,
         author: JSON.parse(mongoUserId),
+        path: pathname,
       });
 
       alert("SUBMITTED");

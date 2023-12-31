@@ -3,17 +3,7 @@ import React from "react";
 import Tags from "../Tags/Tags";
 import Metric from "../metric/Metric";
 import { formatNumber, getTimeStamps } from "@/lib/utils";
-
-interface questionType {
-  _id: string;
-  title: string;
-  tags: { $oid: string }[];
-  author: { $oid: string };
-  upvotes: number;
-  views: number;
-  answer: number;
-  createdAt: Date;
-}
+import { questionType } from "@/@types";
 
 const QuestionCard = ({
   _id,
@@ -25,8 +15,11 @@ const QuestionCard = ({
   answer,
   createdAt,
 }: questionType) => {
+  console.log("From QCard");
+  console.log(tags);
+
   return (
-    <div className="card-wrapper rounded-[10x] p-9 sm:px-11">
+    <div className="card-wrapper text-clip rounded-[10x] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
@@ -41,7 +34,7 @@ const QuestionCard = ({
       </div>
       <div className="mt-3.5 flex  gap-1">
         {tags.map((t) => (
-          <Tags key={t.$oid} _id={t.$oid} value="React" />
+          <Tags key={t._id} _id={t._id} value={t.name} />
         ))}
       </div>
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
