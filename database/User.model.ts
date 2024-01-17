@@ -9,7 +9,7 @@ export interface IUser extends Document {
   bio?: string;
   picture: string;
   location?: string;
-  portfoliowebsite: string;
+  portfoliowebsite?: string;
   reputation: number;
   saved: Schema.Types.ObjectId[];
   joinedAt: Date;
