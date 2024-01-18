@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import Tags from "../Tags/Tags";
-import Metric from "../metric/Metric";
+import Tags from "../../Tags/Tags";
+import Metric from "../../metric/Metric";
 import { formatNumber, getTimeStamps } from "@/lib/utils";
 import { questionType } from "@/@types";
 

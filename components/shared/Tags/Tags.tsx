@@ -22,7 +22,7 @@ const Tags = ({
       className={`mx-4  ${otherClasses} flex  items-center justify-between gap-4 `}
       href={"/tags/" + _id}
     >
-      <Badge className="background-light700_dark300 subtle-medium text-dark400_light900 my-2 rounded-lg px-4 py-2 uppercase">
+      <Badge className="background-light700_dark300 subtle-medium text-dark400_light900 my-2 rounded-lg p-2 uppercase">
         {value}
       </Badge>
       {showCount && (
