@@ -12,3 +12,7 @@ export const QuestionType = z.object({
     .min(1, { message: "minimum 1 tag is required" })
     .max(3, { message: "maximum 3 tags are allowed" }),
 });
+
+export const AnswerSchema = z.object({
+  answer: z.string().min(50),
+});

@@ -3,7 +3,7 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
 
 interface ThemeType {
-  mode: String;
+  mode: string;
   setMode: (mode: string) => void;
 }
 

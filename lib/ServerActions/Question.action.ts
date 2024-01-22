@@ -4,7 +4,11 @@
 import Question from "@/database/Question.model";
 import { ConnectToDB } from "../Database/Mongoose";
 import Tag from "@/database/Tag.model";
-import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import {
+  CreateQuestionParams,
+  GetQuestionByIdParams,
+  GetQuestionsParams,
+} from "./shared.types";
 import User from "@/database/User.model";
 import { revalidatePath } from "next/cache";
 
@@ -17,6 +21,21 @@ export async function getQuestions(params: GetQuestionsParams) {
       .sort({ createdAt: -1 });
 
     return { allQuestions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+export async function getQuestionsbyID(params: GetQuestionByIdParams) {
+  try {
+    ConnectToDB();
+
+    const specificQuestion = await Question.findById(params)
+      .populate({ path: "tags", model: Tag })
+      .populate({ path: "author", model: User })
+      .sort({ createdAt: -1 });
+
+    return specificQuestion;
   } catch (error) {
     console.log(error);
     throw error;
