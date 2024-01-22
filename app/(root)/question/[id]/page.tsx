@@ -1,22 +1,30 @@
+import AllAnswer from "@/components/shared/Cards/AllAnswerCard/AllAnswer";
 import ParseHTML from "@/components/shared/ParseHTML/ParseHTML";
 import Tags from "@/components/shared/Tags/Tags";
+import Votes from "@/components/shared/Votes/Votes";
 import Answer from "@/components/shared/forms/Answer";
 import Metric from "@/components/shared/metric/Metric";
+import { getAllAnswers } from "@/lib/ServerActions/Answer.action";
 import { getQuestionsbyID } from "@/lib/ServerActions/Question.action";
+import { getUserID } from "@/lib/ServerActions/User.action";
 import { formatNumber, getTimeStamps } from "@/lib/utils";
-import console from "console";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Page = async ({ params, searchParams }) => {
-  console.log(params.id);
-  console.log(typeof params.id);
-
   const question = await getQuestionsbyID(params.id);
+  console.log(params);
+  console.log(typeof params.id);
+  const answers = await getAllAnswers(question.id);
+  const { userId: clerkId } = auth();
 
-  console.log("Question Page");
-  console.log(question);
+  let mongoUser;
+
+  if (clerkId) {
+    mongoUser = await getUserID({ userId: clerkId });
+  }
 
   return (
     <>
@@ -37,7 +45,9 @@ const Page = async ({ params, searchParams }) => {
               {question.author.name}
             </p>
           </Link>
-          <div className="flex justify-end">Voting</div>
+          <div className="flex justify-end">
+            <Votes />
+          </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
           {question.title}
@@ -71,7 +81,7 @@ const Page = async ({ params, searchParams }) => {
 
       <ParseHTML data={question.description} />
       <div className="mt-4 flex flex-wrap gap-2">
-        {question.tags.map((tag) => (
+        {question.tags.map((tag: any) => (
           <Tags
             key={tag._id}
             _id={tag._id}
@@ -81,7 +91,18 @@ const Page = async ({ params, searchParams }) => {
         ))}
       </div>
 
-      <Answer />
+      {answers.length > 0 && (
+        <AllAnswer
+          authorId={JSON.stringify(mongoUser._id)}
+          questionID={params.id}
+          totalAnswers={answers.length}
+        />
+      )}
+
+      <Answer
+        authorId={JSON.stringify(mongoUser._id)}
+        questionID={JSON.stringify(params.id)}
+      />
     </>
   );
 };

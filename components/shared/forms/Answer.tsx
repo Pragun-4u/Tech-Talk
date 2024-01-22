@@ -6,22 +6,30 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useTheme } from "@/context/ThemeProvider";
+import { createAnswer } from "@/lib/ServerActions/Answer.action";
 import { AnswerSchema } from "@/lib/zodValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
 import Image from "next/image";
-import React, { useRef } from "react";
+import { usePathname } from "next/navigation";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const Answer = () => {
+const Answer = ({
+  authorId,
+  questionID,
+}: {
+  questionID: string;
+  authorId: string;
+}) => {
   const { mode } = useTheme();
+  const pathname = usePathname();
   console.log(mode);
+  const [isSubmitting, setisSubmitting] = useState(false);
   const editorRef = useRef(null);
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),
@@ -30,7 +38,28 @@ const Answer = () => {
     },
   });
 
-  const HandleAnswerSubmit = () => {};
+  const HandleAnswerSubmit = async (value: z.infer<typeof AnswerSchema>) => {
+    setisSubmitting(true);
+    try {
+      await createAnswer({
+        description: value.answer,
+        author: JSON.parse(authorId),
+        question: JSON.parse(questionID),
+        path: pathname,
+      });
+
+      form.reset();
+
+      if (editorRef.current) {
+        const editor = editorRef.current as any;
+        editor.setContent("");
+      }
+    } catch (error) {
+    } finally {
+      alert("Answer Submitted");
+      setisSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -38,7 +67,10 @@ const Answer = () => {
         <h4 className="paragraph-semibold text-dark400_light800">
           Write your Answer here
         </h4>
-        <Button className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-100 " onClick={()=>{}}>
+        <Button
+          className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-100 "
+          onClick={() => {}}
+        >
           {" "}
           <Image
             src="/assets/icons/stars.svg"
@@ -63,6 +95,7 @@ const Answer = () => {
                 <FormControl>
                   <Editor
                     apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                    //  @ts-ignore
                     onInit={(evt, editor) => (editorRef.current = editor)}
                     onBlur={field.onBlur}
                     onEditorChange={(content) => field.onChange(content)}
@@ -109,6 +142,15 @@ const Answer = () => {
               </FormItem>
             )}
           />
+          <div className="flex justify-end">
+            <Button
+              type="submit"
+              className="primary-gradient w-fit text-white"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting" : "Submit"}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

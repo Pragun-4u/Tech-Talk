@@ -1,14 +1,13 @@
 import { Schema } from "mongoose";
 import { IUser } from "@/mongodb";
 export interface CreateAnswerParams {
-  content: string;
+  description: string;
   author: string; // User ID
   question: string; // Question ID
   path: string;
 }
 export interface GetAnswersParams {
   questionId: string;
-
   sortBy?: string;
   page?: number;
   pageSize?: number;

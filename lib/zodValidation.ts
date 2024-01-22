@@ -14,5 +14,7 @@ export const QuestionType = z.object({
 });
 
 export const AnswerSchema = z.object({
-  answer: z.string().min(50),
+  answer: z
+    .string()
+    .min(50, { message: "Answer must be greater than 50 characters." }),
 });
