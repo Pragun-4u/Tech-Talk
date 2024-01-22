@@ -22,10 +22,13 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/ServerActions/Question.action";
 import { usePathname, useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeProvider";
 
 const btnText: string = "Create";
 
 const Question = ({ mongoUserId }: { mongoUserId: string }) => {
+  const { mode } = useTheme();
+
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [isSubmitting, setisSubmitting] = useState(false);
 
@@ -201,6 +204,8 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
                       "removeformat | help",
                     content_style:
                       "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
