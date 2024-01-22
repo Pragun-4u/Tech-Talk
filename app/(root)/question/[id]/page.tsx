@@ -13,7 +13,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const Page = async ({ params, searchParams }) => {
+const Page = async ({
+  params,
+  searchParams,
+}: {
+  params: any;
+  searchParams: any;
+}) => {
   const question = await getQuestionsbyID(params.id);
   console.log(params);
   console.log(typeof params.id);
