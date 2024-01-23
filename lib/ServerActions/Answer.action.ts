@@ -31,9 +31,6 @@ export async function getAllAnswers(params: GetAnswersParams) {
   try {
     ConnectToDB();
 
-    console.log(params.questionID);
-    console.log(typeof params.questionID);
-
     const answer = await Answer.find({ question: params.questionID })
       .populate("author", "_id clerkId name picture")
       .sort({ createdAt: -1 });

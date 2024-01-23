@@ -15,9 +15,6 @@ const QuestionCard = ({
   answer,
   createdAt,
 }: questionType) => {
-  console.log(_id + "From QCard");
-  console.log(tags);
-
   return (
     <div className="card-wrapper text-clip rounded-[10x] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">

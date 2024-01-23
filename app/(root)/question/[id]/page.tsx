@@ -20,8 +20,6 @@ const Page = async ({
   searchParams: any;
 }) => {
   const question = await getQuestionsbyID(params.id);
-  console.log(params);
-  console.log(typeof params.id);
   // const answers = await getAllAnswers(question.id);
   const { userId: clerkId } = auth();
 
@@ -51,7 +49,16 @@ const Page = async ({
             </p>
           </Link>
           <div className="flex justify-end">
-            <Votes />
+            <Votes
+              type="Question"
+              itemId={JSON.stringify(question._id)}
+              userId={JSON.stringify(mongoUser?._id)}
+              upvotes={question.upvotes.length}
+              downvotes={question.downvotes.length}
+              hasupVoted={question.upvotes.includes(mongoUser?._id)}
+              hasdownVoted={question.downvotes.includes(mongoUser?._id)}
+              hasSaved={mongoUser?.saved.includes(question._id)}
+            />
           </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">

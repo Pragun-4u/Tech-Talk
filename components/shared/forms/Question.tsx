@@ -118,7 +118,6 @@ const Question = ({ mongoUserId }: { mongoUserId: string }) => {
 
   const HandleCloseTag = (tag: string, field: any) => {
     // @ts-ignore
-    console.log(tag);
 
     const newTags = field.value.filter((t: string) => t !== tag);
 

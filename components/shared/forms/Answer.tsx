@@ -28,7 +28,6 @@ const Answer = ({
 }) => {
   const { mode } = useTheme();
   const pathname = usePathname();
-  console.log(mode);
   const [isSubmitting, setisSubmitting] = useState(false);
   const editorRef = useRef(null);
   const form = useForm<z.infer<typeof AnswerSchema>>({

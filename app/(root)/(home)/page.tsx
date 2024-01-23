@@ -48,8 +48,6 @@ import Link from "next/link";
 export default async function Home() {
   const { allQuestions } = await getQuestions({});
 
-  allQuestions.map((q) => console.log(q));
-
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
