@@ -1,26 +1,27 @@
 // "use client";
+// import { getAllSavedQuestion } from "@/lib/ServerActions/User.action";
+// import { auth } from "@clerk/nextjs";
 import QuestionCard from "@/components/shared/Cards/QuestionCard/QuestionCard";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { Button } from "@/components/ui/button";
-import { HomePageFilters } from "@/constants/filter";
-import { getQuestions } from "@/lib/ServerActions/Question.action";
-import Link from "next/link";
+import { QuestionFilters } from "@/constants/filter";
+import { getAllSavedQuestion } from "@/lib/ServerActions/User.action";
+import { auth } from "@clerk/nextjs";
 
-export default async function Home() {
-  const { allQuestions } = await getQuestions({});
+const Page = async () => {
+  const { userId } = auth();
+
+  if (!userId) return null;
+  //  @ts-ignore
+  const { allQuestions } = await getAllSavedQuestion({ clerkId: userId });
+
+  console.log(allQuestions);
 
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Questions</h1>
-
-        <Link className="  flex justify-end max-sm:w-full" href="/ask-question">
-          <Button className="primary-gradient min-h-[48px] w-full px-4 py-3 text-light-900">
-            Ask a Question here.
-          </Button>
-        </Link>
+        <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
       </div>
 
       <div className="mt-4 gap-5  max-sm:flex-col sm:items-center md:mt-11">
@@ -32,12 +33,12 @@ export default async function Home() {
           otherClasses="flex-1"
         />
 
-        <Filters filter={HomePageFilters} />
+        <Filters filter={QuestionFilters} />
       </div>
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {allQuestions.length > 0 ? (
-          allQuestions.map((question) => (
+        {allQuestions?.length > 0 ? (
+          allQuestions?.map((question: any) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
@@ -52,13 +53,15 @@ export default async function Home() {
           ))
         ) : (
           <NoResults
-            title="No Questions to Show"
-            description="Be the first to break the silence and Ask a Question and kickstart the Discussion"
-            buttontext="Ask a Question"
-            path="/ask-question"
+            title="No Saved Questions to Show"
+            description="Explore Questions and save them to find it here. "
+            buttontext="Go to Explore"
+            path="/"
           />
         )}
       </div>
     </>
   );
-}
+};
+
+export default Page;

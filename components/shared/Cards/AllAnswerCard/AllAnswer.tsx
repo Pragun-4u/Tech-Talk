@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getTimeStamps } from "@/lib/utils";
 import ParseHTML from "../../ParseHTML/ParseHTML";
+import Votes from "../../Votes/Votes";
 
 interface props {
   authorId: string;
@@ -18,6 +19,7 @@ interface props {
 const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
   const answers = await getAllAnswers({ questionID });
 
+  console.log(answers);
   return (
     <div className="mt-11">
       <div className="flex items-center justify-between">
@@ -48,7 +50,19 @@ const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
                   </p>
                 </div>
               </Link>
-              <div className="flex justify-end">VOTING</div>
+              <div className="flex justify-end">
+                {
+                  <Votes
+                    type="Answer"
+                    itemId={JSON.stringify(ans._id)}
+                    userId={JSON.stringify(ans.author?._id)}
+                    upvotes={ans.upvotes.length}
+                    downvotes={ans.downvotes.length}
+                    hasupVoted={ans.upvotes.includes(ans.author?._id)}
+                    hasdownVoted={ans.downvotes.includes(ans.author?._id)}
+                  />
+                }
+              </div>
             </div>
             <ParseHTML data={ans.description} />
           </article>
