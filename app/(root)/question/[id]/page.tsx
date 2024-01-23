@@ -15,8 +15,8 @@ import React from "react";
 
 const Page = async ({
   params,
-  searchParams,
-}: {
+} // searchParams,
+: {
   params: any;
   searchParams: any;
 }) => {
