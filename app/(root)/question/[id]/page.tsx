@@ -4,7 +4,7 @@ import Tags from "@/components/shared/Tags/Tags";
 import Votes from "@/components/shared/Votes/Votes";
 import Answer from "@/components/shared/forms/Answer";
 import Metric from "@/components/shared/metric/Metric";
-import { getAllAnswers } from "@/lib/ServerActions/Answer.action";
+// import { getAllAnswers } from "@/lib/ServerActions/Answer.action";
 import { getQuestionsbyID } from "@/lib/ServerActions/Question.action";
 import { getUserID } from "@/lib/ServerActions/User.action";
 import { formatNumber, getTimeStamps } from "@/lib/utils";
@@ -22,7 +22,7 @@ const Page = async ({
   const question = await getQuestionsbyID(params.id);
   console.log(params);
   console.log(typeof params.id);
-  const answers = await getAllAnswers(question.id);
+  // const answers = await getAllAnswers(question.id);
   const { userId: clerkId } = auth();
 
   let mongoUser;
@@ -96,13 +96,13 @@ const Page = async ({
         ))}
       </div>
 
-      {answers.length > 0 && (
+      {
         <AllAnswer
           authorId={JSON.stringify(mongoUser._id)}
           questionID={params.id}
-          totalAnswers={answers.length}
+          totalAnswers={question.answers.length}
         />
-      )}
+      }
 
       <Answer
         authorId={JSON.stringify(mongoUser._id)}
