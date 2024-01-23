@@ -135,7 +135,8 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
 export async function getAllSavedQuestion(params: GetSavedQuestionsParams) {
   try {
     ConnectToDB();
-    const { clerkId, page = 1, pageSize = 10, filter, searchQuery } = params;
+    //  page = 1, pageSize = 10, filter,
+    const { clerkId, searchQuery } = params;
     if (!clerkId) {
       return;
     }
