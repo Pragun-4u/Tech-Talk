@@ -31,10 +31,10 @@ export async function getAllAnswers(params: GetAnswersParams) {
   try {
     ConnectToDB();
 
-    console.log(params);
-    console.log(typeof params);
+    console.log(params.questionID);
+    console.log(typeof params.questionID);
 
-    const answer = await Answer.find({ question: params })
+    const answer = await Answer.find({ question: params.questionID })
       .populate("author", "_id clerkId name picture")
       .sort({ createdAt: -1 });
 

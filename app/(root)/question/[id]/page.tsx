@@ -14,9 +14,8 @@ import Link from "next/link";
 import React from "react";
 
 const Page = async ({
-  params,
-} // searchParams,
-: {
+  params, // searchParams,
+}: {
   params: any;
   searchParams: any;
 }) => {
