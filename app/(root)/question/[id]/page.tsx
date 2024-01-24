@@ -31,7 +31,7 @@ const Page = async ({
 
   return (
     <>
-      <div className="flex-start w-full flex-col">
+      <div className=" flex-start w-full flex-col">
         <div className="flex w-full flex-col-reverse  justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
           <Link
             className="flex items-center justify-start gap-1"
@@ -92,7 +92,7 @@ const Page = async ({
       </div>
 
       <ParseHTML data={question.description} />
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className=" mt-4 flex flex-wrap gap-2">
         {question.tags.map((tag: any) => (
           <Tags
             key={tag._id}

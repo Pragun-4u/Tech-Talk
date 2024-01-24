@@ -34,3 +34,15 @@ export function formatNumber(number: number): string {
     return number.toString();
   }
 }
+
+export function formatMonthAndYear(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
+    month: "long",
+    year: "numeric",
+  };
+  const formattedDate: string = new Intl.DateTimeFormat(
+    "en-US",
+    options
+  ).format(date);
+  return formattedDate;
+}

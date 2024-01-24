@@ -10,12 +10,13 @@ import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
 import Link from "next/link";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedOut, useAuth } from "@clerk/nextjs";
 import { useTheme } from "@/context/ThemeProvider";
 import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 
 export const NavItems = () => {
+  const { userId } = useAuth();
   const pathname = usePathname();
 
   return (
@@ -24,6 +25,13 @@ export const NavItems = () => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
           pathname === item.route;
+        if (item.route === "/profile") {
+          if (userId) {
+            item.route = `${item.route}/${userId}`;
+          } else {
+            return null;
+          }
+        }
 
         return (
           <SheetClose asChild key={item.route}>
