@@ -8,12 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatMonthAndYear } from "@/lib/utils";
 import ProfilePageLink from "@/components/shared/ProfilePage/ProfilePageLink";
 import Stats from "@/components/shared/Stats/Stats";
+import QuestionTab from "@/components/shared/Cards/Question/QuestionTab";
 
 const Page = async ({ params }: any) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 
-  console.log({ userInfo });
+  // console.log({ userInfo });
 
   return (
     <>
@@ -84,13 +85,18 @@ const Page = async ({ params }: any) => {
         <Tabs defaultValue="top-posts" className="flex-1">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
             <TabsTrigger value="top-posts" className="tab">
-              Top Posts
+              POSTS
             </TabsTrigger>
             <TabsTrigger className="tab" value="answers">
               Answers
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="top-posts">POSTS</TabsContent>
+          <TabsContent value="top-posts">
+            <QuestionTab
+              userId={userInfo.user._id}
+              clerkId={userInfo.user._clerkId}
+            />
+          </TabsContent>
           <TabsContent value="answers">Answers</TabsContent>
         </Tabs>
       </div>

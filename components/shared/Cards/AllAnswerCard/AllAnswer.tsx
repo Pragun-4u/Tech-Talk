@@ -19,7 +19,7 @@ interface props {
 const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
   const answers = await getAllAnswers({ questionID });
 
-  console.log(answers);
+  // console.log(answers);
   return (
     <div className="mt-11">
       <div className="flex items-center justify-between">

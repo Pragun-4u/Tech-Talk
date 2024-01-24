@@ -1,5 +1,5 @@
 import { URLProps } from "@/@types";
-import QuestionCard from "@/components/shared/Cards/QuestionCard/QuestionCard";
+import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
 import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { getTagQuestion } from "@/lib/ServerActions/Tags.action";

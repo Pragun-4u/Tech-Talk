@@ -49,6 +49,7 @@ export interface questionType {
   views: number;
   answer: number;
   createdAt: Date;
+  clerkId?: string;
 }
 
 export interface SearchParamsProps {

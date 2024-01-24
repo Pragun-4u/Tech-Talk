@@ -1,5 +1,5 @@
 // "use client";
-import QuestionCard from "@/components/shared/Cards/QuestionCard/QuestionCard";
+import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
