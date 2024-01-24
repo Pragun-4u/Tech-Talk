@@ -51,17 +51,15 @@ const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
                 </div>
               </Link>
               <div className="flex justify-end">
-                {
-                  <Votes
-                    type="Answer"
-                    itemId={JSON.stringify(ans._id)}
-                    userId={JSON.stringify(ans.author?._id)}
-                    upvotes={ans.upvotes.length}
-                    downvotes={ans.downvotes.length}
-                    hasupVoted={ans.upvotes.includes(ans.author?._id)}
-                    hasdownVoted={ans.downvotes.includes(ans.author?._id)}
-                  />
-                }
+                <Votes
+                  type="Answer"
+                  itemId={JSON.stringify(ans._id)}
+                  userId={JSON.stringify(ans.author?._id)}
+                  upvotes={ans.upvotes.length}
+                  downvotes={ans.downvotes.length}
+                  hasupVoted={ans.upvotes.includes(ans.author?._id)}
+                  hasdownVoted={ans.downvotes.includes(ans.author?._id)}
+                />
               </div>
             </div>
             <ParseHTML data={ans.description} />

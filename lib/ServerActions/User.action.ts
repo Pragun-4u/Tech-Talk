@@ -121,7 +121,6 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
         { new: true }
       );
     }
-    console.log({ user });
 
     revalidatePath(path);
 

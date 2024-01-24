@@ -12,7 +12,7 @@ const Tag = async () => {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Users</h1>
+        <h1 className="h1-bold text-dark100_light900">All Tags</h1>
       </div>
 
       <div className="mt-4 gap-5  max-sm:flex-col sm:items-center md:mt-11">
@@ -27,7 +27,7 @@ const Tag = async () => {
         <Filters filter={TagFilters} />
       </div>
 
-      <section className="mt-12 flex flex-wrap gap-4">
+      <section className="mt-12 flex flex-wrap gap-2">
         {allTags.length > 0 ? (
           allTags.map((tag) => (
             // <TagsCard key={tag.name} tag={tag}></TagsCard>
