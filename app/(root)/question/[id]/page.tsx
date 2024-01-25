@@ -1,4 +1,4 @@
-import AllAnswer from "@/components/shared/Cards/AllAnswerCard/AllAnswer";
+import AllAnswer from "@/components/shared/Cards/AnswerCard/AllAnswer";
 import ParseHTML from "@/components/shared/ParseHTML/ParseHTML";
 import Tags from "@/components/shared/Tags/Tags";
 import Votes from "@/components/shared/Votes/Votes";
@@ -103,13 +103,11 @@ const Page = async ({
         ))}
       </div>
 
-      {
-        <AllAnswer
-          authorId={JSON.stringify(mongoUser?._id)}
-          questionID={params.id}
-          totalAnswers={question.answers.length}
-        />
-      }
+      <AllAnswer
+        authorId={JSON.stringify(mongoUser?._id)}
+        questionID={params.id}
+        totalAnswers={question.answers.length}
+      />
 
       <Answer
         authorId={JSON.stringify(mongoUser?._id)}

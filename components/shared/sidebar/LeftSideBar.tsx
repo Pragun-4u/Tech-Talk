@@ -11,7 +11,7 @@ const LeftSideBar = () => {
       <Sheet>
         <NavItems />
         <SignedOut>
-          <div className="flex flex-col gap-5 pt-7">
+          <div className="-mt-40 flex flex-col gap-5 pt-7">
             <Link href="/sign-in" className="mx-auto ">
               <Image
                 alt="signup"

@@ -193,6 +193,25 @@ export async function getAllSavedQuestion(params: GetSavedQuestionsParams) {
   }
 }
 
+export async function getAllAnswersbyUser(params: GetUserStatsParams) {
+  try {
+    ConnectToDB();
+
+    const { userId } = params;
+
+    const totalAnswer = await Answer.countDocuments({ author: userId });
+
+    const userAnswer = await Answer.find({ author: userId })
+      .sort({ upvotes: -1 })
+      .populate("question", "_id title")
+      .populate("author", "_id clerkId name picture");
+
+    return { totalAnswer, answers: userAnswer };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 export async function getAllQuestionsbyUser(params: GetUserStatsParams) {
   try {
     ConnectToDB();

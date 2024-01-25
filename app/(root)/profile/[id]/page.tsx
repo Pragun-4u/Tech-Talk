@@ -9,6 +9,7 @@ import { formatMonthAndYear } from "@/lib/utils";
 import ProfilePageLink from "@/components/shared/ProfilePage/ProfilePageLink";
 import Stats from "@/components/shared/Stats/Stats";
 import QuestionTab from "@/components/shared/Cards/Question/QuestionTab";
+import AnswerTab from "@/components/shared/Cards/AnswerCard/AnswerTab";
 
 const Page = async ({ params }: any) => {
   const { userId: clerkId } = auth();
@@ -97,7 +98,12 @@ const Page = async ({ params }: any) => {
               clerkId={userInfo.user._clerkId}
             />
           </TabsContent>
-          <TabsContent value="answers">Answers</TabsContent>
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            <AnswerTab
+              userId={userInfo.user._id}
+              clerkId={userInfo.user._clerkId}
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </>
