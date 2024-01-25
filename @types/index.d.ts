@@ -44,7 +44,7 @@ export interface questionType {
     name: string;
     question: [];
   }[];
-  author: { $oid: string; name: string; picture: string };
+  author: { $oid: string; name: string; picture: string; clerkId: string };
   upvotes: number;
   views: number;
   answer: number;

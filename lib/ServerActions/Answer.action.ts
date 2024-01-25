@@ -4,10 +4,12 @@ import { ConnectToDB } from "../Database/Mongoose";
 import {
   AnswerVoteParams,
   CreateAnswerParams,
+  DeleteAnswerParams,
   GetAnswersParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
 import Question from "@/database/Question.model";
+import Interaction from "@/database/Interaction.model";
 
 export async function createAnswer(params: CreateAnswerParams) {
   try {
@@ -104,6 +106,33 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     if (!answer) {
       throw new Error("no Answer exists");
     }
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function deleteAnswer(params: DeleteAnswerParams) {
+  try {
+    ConnectToDB();
+
+    const { answerId, path } = params;
+
+    const answer = await Answer.findById(answerId);
+
+    if (!answer) {
+      throw new Error("no answer found");
+    }
+
+    await Answer.deleteOne({ _id: answerId });
+    await Question.updateMany(
+      { _id: answer._id },
+      { $pull: { answer: answerId } }
+    );
+    await Interaction.deleteMany({ answer: answerId });
+
+    alert("deleted");
     revalidatePath(path);
   } catch (error) {
     console.log(error);

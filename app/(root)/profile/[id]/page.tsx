@@ -15,7 +15,8 @@ const Page = async ({ params }: any) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 
-  // console.log({ userInfo });
+  console.log(userInfo.user.clerkId);
+  console.log("userInfo.user._clerkId");
 
   return (
     <>
@@ -95,13 +96,13 @@ const Page = async ({ params }: any) => {
           <TabsContent value="top-posts">
             <QuestionTab
               userId={userInfo.user._id}
-              clerkId={userInfo.user._clerkId}
+              clerkId={userInfo.user.clerkId}
             />
           </TabsContent>
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
             <AnswerTab
               userId={userInfo.user._id}
-              clerkId={userInfo.user._clerkId}
+              clerkId={userInfo.user.clerkId}
             />
           </TabsContent>
         </Tabs>

@@ -6,12 +6,15 @@ import { ConnectToDB } from "../Database/Mongoose";
 import Tag from "@/database/Tag.model";
 import {
   CreateQuestionParams,
+  DeleteQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
 } from "./shared.types";
 import User from "@/database/User.model";
 import { revalidatePath } from "next/cache";
+import Answer from "@/database/Answer.model";
+import Interaction from "@/database/Interaction.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -142,6 +145,27 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     if (!question) {
       throw new Error("no question exists");
     }
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function deleteQuestion(params: DeleteQuestionParams) {
+  try {
+    ConnectToDB();
+
+    const { questionId, path } = params;
+
+    await Question.deleteOne({ _id: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
+    await Tag.updateMany(
+      { question: questionId },
+      { $pull: { question: questionId } }
+    );
+    alert("deleted");
     revalidatePath(path);
   } catch (error) {
     console.log(error);

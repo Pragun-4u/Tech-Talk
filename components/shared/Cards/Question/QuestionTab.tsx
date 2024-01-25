@@ -10,7 +10,8 @@ interface props {
 const QuestionTab = async ({ userId, clerkId }: props) => {
   const result = await getAllQuestionsbyUser({ userId });
 
-  console.log({ result });
+  console.log(result.questions);
+  console.log("result.questions");
 
   return (
     <>
@@ -21,7 +22,7 @@ const QuestionTab = async ({ userId, clerkId }: props) => {
             _id={question._id}
             title={question.title}
             tags={question.tags}
-            clerkId={question.clerkId}
+            clerkId={question.author.clerkId}
             author={question.author}
             upvotes={question.upvotes.length}
             answer={question.answers.length}

@@ -2,6 +2,8 @@ import { formatNumber, getTimeStamps } from "@/lib/utils";
 import React from "react";
 import Metric from "../../metric/Metric";
 import Link from "next/link";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../../EditDelete/EditDeleteAction";
 
 interface Props {
   clerkId: string;
@@ -31,6 +33,7 @@ const AnswerCard = ({
   createdAt,
 }: Props) => {
   console.log(question[0]);
+  const showActionBtn = clerkId && clerkId === author.clerkId;
 
   return (
     <Link
@@ -46,6 +49,15 @@ const AnswerCard = ({
             {question[0].title}
           </h3>
         </div>
+        <SignedIn>
+          {showActionBtn && (
+            <EditDeleteAction
+              type="Answer"
+              clerkId={author.clerkId}
+              itemId={JSON.stringify(_id)}
+            />
+          )}
+        </SignedIn>
       </div>
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
@@ -59,7 +71,7 @@ const AnswerCard = ({
         />
         <div className="flex-center gap-3">
           <Metric
-            imgUrl="/assets/icon/like.svg"
+            imgUrl="/assets/icons/like.svg"
             value={formatNumber(upvotes)}
             alt="like Icon"
             title={` - Votes`}

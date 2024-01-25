@@ -4,6 +4,8 @@ import Tags from "../../Tags/Tags";
 import Metric from "../../metric/Metric";
 import { formatNumber, getTimeStamps } from "@/lib/utils";
 import { questionType } from "@/@types";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../../EditDelete/EditDeleteAction";
 
 const QuestionCard = ({
   _id,
@@ -16,6 +18,11 @@ const QuestionCard = ({
   answer,
   createdAt,
 }: questionType) => {
+  const showActionBtn = clerkId && clerkId === author.clerkId;
+
+  console.log(author.clerkId);
+  console.log(clerkId);
+
   return (
     <div className="card-wrapper my-2 text-clip rounded-[10x] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -29,10 +36,19 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+        <SignedIn>
+          {showActionBtn && (
+            <EditDeleteAction
+              type="Question"
+              clerkId={author.clerkId}
+              itemId={JSON.stringify(_id)}
+            />
+          )}
+        </SignedIn>
       </div>
       <div className="mt-3.5 flex  gap-1">
-        {tags.map((t) => (
-          <Tags key={t._id} _id={t._id} value={t.name} />
+        {tags.map((tag) => (
+          <Tags key={tag._id} _id={tag._id} value={tag.name} />
         ))}
       </div>
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
