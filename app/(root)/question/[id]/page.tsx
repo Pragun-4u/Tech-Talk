@@ -70,7 +70,7 @@ const Page = async ({
           imgUrl="/assets/icons/clock.svg"
           title=""
           alt="user"
-          value={` - asked ${getTimeStamps(question.createdAt)} `}
+          value={`  asked ${getTimeStamps(question.createdAt)} `}
           isAuthor
           textStyles="body-medium text-dark400_Light800"
         />

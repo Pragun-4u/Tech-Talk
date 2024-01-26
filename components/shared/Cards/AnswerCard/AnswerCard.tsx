@@ -32,7 +32,6 @@ const AnswerCard = ({
   upvotes,
   createdAt,
 }: Props) => {
-  console.log(question[0]);
   const showActionBtn = clerkId && clerkId === author.clerkId;
 
   return (
@@ -64,7 +63,7 @@ const AnswerCard = ({
           imgUrl={author.picture}
           value={author.name}
           alt="user"
-          title={` - asked ${getTimeStamps(createdAt)} `}
+          title={` asked ${getTimeStamps(createdAt)} `}
           href={`/profile/${author.clerkId}`}
           isAuthor
           textStyles="body-medium text-dark400_light800"

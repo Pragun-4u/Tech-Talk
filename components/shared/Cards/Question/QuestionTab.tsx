@@ -10,9 +10,6 @@ interface props {
 const QuestionTab = async ({ userId, clerkId }: props) => {
   const result = await getAllQuestionsbyUser({ userId });
 
-  console.log(result.questions);
-  console.log("result.questions");
-
   return (
     <>
       {result.questions.length > 0 ? (

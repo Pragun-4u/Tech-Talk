@@ -12,8 +12,8 @@ const Page = async ({ params }: any) => {
   const mongoUser = await getUserID({ userId });
   const result = await getQuestionsbyID(params.id);
 
-  console.log({ result });
-  console.log(result.tags);
+  // console.log({ result });
+  // console.log(result.tags);
 
   return (
     <div>

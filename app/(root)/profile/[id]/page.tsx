@@ -15,7 +15,7 @@ const Page = async ({ params }: any) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 
-  console.log(userInfo.user.clerkId);
+  console.log(userInfo.user);
   console.log("userInfo.user._clerkId");
 
   return (
@@ -38,12 +38,12 @@ const Page = async ({ params }: any) => {
             </p>
 
             <div className="text-dark200_light800 mt-5 flex flex-wrap items-center justify-start gap-5">
-              {userInfo.user.portfoliowebsite && (
+              {userInfo.user.portfolioWebsite && (
                 <>
                   <ProfilePageLink
                     imgUrl="/assets/icons/link.svg"
                     title="Portfolio"
-                    href={userInfo.user.portfoliowebsite}
+                    href={userInfo.user.portfolioWebsite}
                   />
                 </>
               )}

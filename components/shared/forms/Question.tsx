@@ -73,7 +73,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
 
         alert("Question Edited.");
 
-        router.push(pathname); // check "/questions/$q.id"
+        router.push(`/question/${parsedQuestionDetails._id}`); // check "/questions/$q.id"
       } else {
         await createQuestion({
           title: values.Title,

@@ -16,7 +16,7 @@ const Page = async () => {
   //  @ts-ignore
   const { allQuestions } = await getAllSavedQuestion({ clerkId: userId });
 
-  console.log({ allQuestions });
+  // console.log({ allQuestions });
 
   return (
     <>

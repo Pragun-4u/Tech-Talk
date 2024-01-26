@@ -20,9 +20,6 @@ const QuestionCard = ({
 }: questionType) => {
   const showActionBtn = clerkId && clerkId === author.clerkId;
 
-  console.log(author.clerkId);
-  console.log(clerkId);
-
   return (
     <div className="card-wrapper my-2 text-clip rounded-[10x] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -56,8 +53,8 @@ const QuestionCard = ({
           imgUrl={author.picture}
           value={author.name}
           alt="user"
-          title={` - asked ${getTimeStamps(createdAt)} `}
-          href={`/profile/${author.$oid}`}
+          title={`  asked ${getTimeStamps(createdAt)} `}
+          href={`/profile/${author.clerkId}`}
           isAuthor
           textStyles="body-medium text-dark400_Light800"
         />
