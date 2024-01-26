@@ -30,7 +30,7 @@ import { useTheme } from "@/context/ThemeProvider";
 interface Props {
   mongoUserId: string;
   type?: string;
-  questionDetails: string;
+  questionDetails?: string;
 }
 
 const Question = ({ type, mongoUserId, questionDetails }: Props) => {
@@ -38,7 +38,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
   const parsedQuestionDetails =
     type === "Edit" && JSON.parse(questionDetails || "");
   const groupedTags =
-    type === "Edit" && parsedQuestionDetails?.tags.map((tag) => tag.name);
+    type === "Edit" && parsedQuestionDetails?.tags.map((tag: any) => tag.name);
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [isSubmitting, setisSubmitting] = useState(false);
 
