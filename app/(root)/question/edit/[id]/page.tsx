@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getUserID } from "@/lib/ServerActions/User.action";
 import { getQuestionsbyID } from "@/lib/ServerActions/Question.action";
 
-const Page = async ({ params }) => {
+const Page = async ({ params }: any) => {
   const { userId } = auth();
 
   if (!userId) redirect("/sign-in");
