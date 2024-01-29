@@ -15,9 +15,6 @@ const Page = async ({ params }: any) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 
-  console.log(userInfo.user);
-  console.log("userInfo.user._clerkId");
-
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">

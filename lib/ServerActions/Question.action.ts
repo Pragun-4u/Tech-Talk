@@ -173,6 +173,24 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     throw error;
   }
 }
+export async function getTopQuestions() {
+  try {
+    ConnectToDB();
+
+    const topQuestions = await Question.find({})
+      .sort({ views: -1, upvotes: -1 })
+      .limit(5);
+
+    if (!topQuestions) {
+      throw new Error("Question does not exist");
+    }
+
+    return topQuestions;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 export async function editQuestion(params: EditQuestionParams) {
   try {
     ConnectToDB();

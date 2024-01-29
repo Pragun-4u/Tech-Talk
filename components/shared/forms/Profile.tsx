@@ -65,8 +65,6 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
     } finally {
       setisSubmitting(false);
     }
-
-    console.log(values);
   }
 
   return (

@@ -86,3 +86,21 @@ export async function getTagQuestion(params: GetQuestionsByTagIdParams) {
     throw error;
   }
 }
+
+export async function getTopTags() {
+  try {
+    ConnectToDB();
+
+    const topTags = Tag.aggregate([
+      { $project: { name: 1, numberofQuestions: { $size: "$question" } } },
+      { $sort: { numberofQuestion: -1 } },
+      { $limit: 5 },
+    ]);
+    if (!topTags) {
+      throw new Error("Tag not found");
+    }
+    return topTags;
+  } catch (error) {
+    console.log(error);
+  }
+}

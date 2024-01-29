@@ -1,38 +1,8 @@
-import { SidebarLink, rightsidebar } from "../@types";
+import { SidebarLink } from "../@types";
 export const Themes = [
   { value: "light", label: "Light", icon: "/assets/icons/sun.svg" },
   { value: "dark", label: "Dark", icon: "/assets/icons/moon.svg" },
   { value: "system", label: "System", icon: "/assets/icons/computer.svg" },
-];
-
-export const tags = [
-  {
-    _id: 1,
-    value: "Javascript",
-    totalQuestion: 5,
-  },
-  { _id: 2, value: "React", totalQuestion: 2 },
-  { _id: 3, value: "Nextjs", totalQuestion: 7 },
-  { _id: 4, value: "Redux", totalQuestion: 10 },
-  { _id: 5, value: "Java", totalQuestion: 5 },
-];
-
-export const rightsidebarcontent: rightsidebar[] = [
-  {
-    value: " amet consectetur adipisicing elit. Eligendivoluptatem odit dolore",
-  },
-  {
-    value: " amet consectetur adipisicing elit. Eligendivoluptatem odit dolore",
-  },
-  {
-    value: " amet consectetur adipisicing elit. Eligendivoluptatem odit dolore",
-  },
-  {
-    value: " amet consectetur adipisicing elit. Eligendivoluptatem odit dolore",
-  },
-  {
-    value: " amet consectetur adipisicing elit. Eligendivoluptatem odit dolore",
-  },
 ];
 
 export const sidebarLinks: SidebarLink[] = [
