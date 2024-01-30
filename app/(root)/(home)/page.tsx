@@ -12,6 +12,7 @@ import Link from "next/link";
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { allQuestions } = await getQuestions({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
 
   return (

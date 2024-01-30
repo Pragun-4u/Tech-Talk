@@ -15,6 +15,7 @@ import React from "react";
 
 const Page = async ({
   params, // searchParams,
+  searchParams,
 }: {
   params: any;
   searchParams: any;
@@ -107,12 +108,28 @@ const Page = async ({
         authorId={JSON.stringify(mongoUser?._id)}
         questionID={params.id}
         totalAnswers={question.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
 
-      <Answer
-        authorId={JSON.stringify(mongoUser?._id)}
-        questionID={JSON.stringify(params.id)}
-      />
+      {!clerkId ? (
+        <p className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
+          Know a better answer?{" "}
+          <Link href={`/sign-up`}>
+            <span className="text-orange-500">Sign-up </span>
+          </Link>
+          or
+          <Link href={`/sign-in`}>
+            <span className="text-orange-500"> Sign-in </span>
+          </Link>
+          and spread the Knowledge !
+        </p>
+      ) : (
+        <Answer
+          authorId={JSON.stringify(mongoUser?._id)}
+          questionID={JSON.stringify(params.id)}
+        />
+      )}
     </>
   );
 };

@@ -7,7 +7,10 @@ import { getAllUsers } from "@/lib/ServerActions/User.action";
 import Link from "next/link";
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
-  const { allUsers } = await getAllUsers({ searchQuery: searchParams.q });
+  const { allUsers } = await getAllUsers({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
 
   return (
     <>

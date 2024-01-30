@@ -37,9 +37,33 @@ export async function getAllAnswers(params: GetAnswersParams) {
   try {
     ConnectToDB();
 
+    const { sortBy } = params;
+
+    let sortOptions = {};
+
+    switch (sortBy) {
+      case "highestupvotes":
+        sortOptions = { upvotes: -1 };
+        break;
+      case "lowestupvotes":
+        sortOptions = { upvotes: 1 };
+        break;
+      case "recent":
+        sortOptions = { createdAt: -1 };
+        break;
+      case "old":
+        sortOptions = { createdAt: 1 };
+        break;
+
+      default:
+        sortOptions = { upvotes: -1 };
+
+        break;
+    }
+
     const answer = await Answer.find({ question: params.questionID })
       .populate("author", "_id clerkId name picture")
-      .sort({ createdAt: -1 });
+      .sort(sortOptions);
 
     return answer;
   } catch (error) {

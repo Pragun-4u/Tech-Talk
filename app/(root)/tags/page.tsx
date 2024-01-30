@@ -8,7 +8,10 @@ import Link from "next/link";
 import React from "react";
 
 const Tag = async ({ searchParams }: SearchParamsProps) => {
-  const allTags = await getTags({ searchQuery: searchParams.q });
+  const allTags = await getTags({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
 
   return (
     <>

@@ -12,12 +12,18 @@ interface props {
   authorId: string;
   questionID: string;
   totalAnswers: number;
-  filter?: number;
+  filter?: string;
   page?: number;
 }
 
-const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
-  const answers = await getAllAnswers({ questionID });
+const AllAnswer = async ({
+  authorId,
+  questionID,
+  totalAnswers,
+  page,
+  filter,
+}: props) => {
+  const answers = await getAllAnswers({ questionID, sortBy: filter });
 
   // console.log(answers);
   return (
@@ -28,7 +34,10 @@ const AllAnswer = async ({ authorId, questionID, totalAnswers }: props) => {
       </div>
       <div>
         {answers.map((ans) => (
-          <article key={ans._id} className=" items-center justify-between">
+          <article
+            key={ans._id}
+            className=" my-5 items-center justify-between border-b-2 border-orange-500 pb-2"
+          >
             <div className="mb-8 flex flex-col-reverse justify-between gap-5 sm:flex-row">
               <Link
                 href={`/profile/${ans.author.clerkId}`}

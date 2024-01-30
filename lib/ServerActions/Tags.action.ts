@@ -38,7 +38,7 @@ export async function getTags(params: GetAllTagsParams) {
   try {
     ConnectToDB();
 
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
 
     const query: FilterQuery<typeof Tag> = {};
 
@@ -46,7 +46,27 @@ export async function getTags(params: GetAllTagsParams) {
       query.$or = [{ name: { $regex: new RegExp(searchQuery, "i") } }];
     }
 
-    const tag = await Tag.find(query);
+    let sortOptions = {};
+
+    switch (filter) {
+      case "popular ":
+        sortOptions = { question: -1 };
+        break;
+      case "recent":
+        sortOptions = { createdOn: -1 };
+        break;
+      case "name":
+        sortOptions = { name: 1 };
+        break;
+      case "old":
+        sortOptions = { createdOn: 1 };
+        break;
+
+      default:
+        break;
+    }
+
+    const tag = await Tag.find(query).sort(sortOptions);
 
     if (!tag) throw new Error("No User found");
 
