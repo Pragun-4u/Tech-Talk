@@ -5,8 +5,11 @@ import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { getTagQuestion } from "@/lib/ServerActions/Tags.action";
 import React from "react";
 
-const Page = async ({ params }: URLProps) => {
-  const result = await getTagQuestion({ tagId: params.id });
+const Page = async ({ params, searchParams }: URLProps) => {
+  const result = await getTagQuestion({
+    tagId: params.id,
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>
@@ -14,7 +17,7 @@ const Page = async ({ params }: URLProps) => {
 
       <div className="mt-4 gap-5  max-sm:flex-col sm:items-center md:mt-11">
         <LocalSearchbar
-          route="/"
+          route={`/tags/${params.id}`}
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder={`Search for questions with ${result.tagTitle} tag`}

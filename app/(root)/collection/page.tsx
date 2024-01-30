@@ -1,6 +1,4 @@
-// "use client";
-// import { getAllSavedQuestion } from "@/lib/ServerActions/User.action";
-// import { auth } from "@clerk/nextjs";
+import { SearchParamsProps } from "@/@types";
 import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
@@ -9,14 +7,15 @@ import { QuestionFilters } from "@/constants/filter";
 import { getAllSavedQuestion } from "@/lib/ServerActions/User.action";
 import { auth } from "@clerk/nextjs";
 
-const Page = async () => {
+const Page = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();
 
   if (!userId) return null;
   //  @ts-ignore
-  const { allQuestions } = await getAllSavedQuestion({ clerkId: userId });
-
-  // console.log({ allQuestions });
+  const { allQuestions } = await getAllSavedQuestion({
+    clerkId: userId,
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>
@@ -26,7 +25,7 @@ const Page = async () => {
 
       <div className="mt-4 gap-5  max-sm:flex-col sm:items-center md:mt-11">
         <LocalSearchbar
-          route="/"
+          route={`/collection`}
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for questions"

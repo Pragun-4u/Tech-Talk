@@ -16,11 +16,24 @@ import User from "@/database/User.model";
 import { revalidatePath } from "next/cache";
 import Answer from "@/database/Answer.model";
 import Interaction from "@/database/Interaction.model";
+import { FilterQuery } from "mongoose";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     ConnectToDB();
-    const allQuestions = await Question.find({})
+
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof Question> = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: new RegExp(searchQuery, "i") } },
+        { description: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+
+    const allQuestions = await Question.find(query)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });

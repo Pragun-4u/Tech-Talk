@@ -1,4 +1,5 @@
 // "use client";
+import { SearchParamsProps } from "@/@types";
 import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
@@ -8,8 +9,10 @@ import { HomePageFilters } from "@/constants/filter";
 import { getQuestions } from "@/lib/ServerActions/Question.action";
 import Link from "next/link";
 
-export default async function Home() {
-  const { allQuestions } = await getQuestions({});
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const { allQuestions } = await getQuestions({
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>

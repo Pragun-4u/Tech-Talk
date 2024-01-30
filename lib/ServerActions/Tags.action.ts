@@ -34,11 +34,19 @@ export async function getTopInteractedTags(tags: GetTopInteractedTagsParams) {
   }
 }
 
-export async function getTags(tags: GetAllTagsParams) {
+export async function getTags(params: GetAllTagsParams) {
   try {
     ConnectToDB();
 
-    const tag = await Tag.find({});
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof Tag> = {};
+
+    if (searchQuery) {
+      query.$or = [{ name: { $regex: new RegExp(searchQuery, "i") } }];
+    }
+
+    const tag = await Tag.find(query);
 
     if (!tag) throw new Error("No User found");
 
@@ -93,7 +101,7 @@ export async function getTopTags() {
 
     const topTags = Tag.aggregate([
       { $project: { name: 1, numberofQuestions: { $size: "$question" } } },
-      { $sort: { numberofQuestion: -1 } },
+      { $sort: { numberofQuestions: -1 } },
       { $limit: 5 },
     ]);
     if (!topTags) {

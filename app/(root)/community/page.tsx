@@ -1,3 +1,4 @@
+import { SearchParamsProps } from "@/@types";
 import UserCard from "@/components/shared/Cards/UserCard/UserCard";
 import Filters from "@/components/shared/filters/Filters";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
@@ -5,8 +6,8 @@ import { UserFilters } from "@/constants/filter";
 import { getAllUsers } from "@/lib/ServerActions/User.action";
 import Link from "next/link";
 
-const Page = async () => {
-  const { allUsers } = await getAllUsers({});
+const Page = async ({ searchParams }: SearchParamsProps) => {
+  const { allUsers } = await getAllUsers({ searchQuery: searchParams.q });
 
   return (
     <>
