@@ -22,7 +22,7 @@ const MainSearch = () => {
     const handleOutsideClick = (event: any) => {
       if (
         searchContainerRef.current &&
-        //@ts-ignore
+        //  @ts-ignore
         !searchContainerRef.current.contains(event.target)
       ) {
         setisOpen(false);

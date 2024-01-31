@@ -10,7 +10,6 @@ import ProfilePageLink from "@/components/shared/ProfilePage/ProfilePageLink";
 import Stats from "@/components/shared/Stats/Stats";
 import QuestionTab from "@/components/shared/Cards/Question/QuestionTab";
 import AnswerTab from "@/components/shared/Cards/AnswerCard/AnswerTab";
-import { useSearchParams } from "next/navigation";
 
 const Page = async ({ params, searchParams }: any) => {
   // const searchParams=useSearchParams();
