@@ -1,14 +1,16 @@
 import { getAllQuestionsbyUser } from "@/lib/ServerActions/User.action";
 import React from "react";
 import QuestionCard from "./QuestionCard";
+import { SearchParamsProps } from "@/@types";
+import Pagination from "../../Pagination/Pagination";
 
-interface props {
+interface props extends SearchParamsProps {
   userId: string;
   clerkId?: string;
 }
 
-const QuestionTab = async ({ userId, clerkId }: props) => {
-  const result = await getAllQuestionsbyUser({ userId });
+const QuestionTab = async ({ userId, clerkId, searchParams }: props) => {
+  const result = await getAllQuestionsbyUser({ userId, page:searchParams?.page? +searchParams.page : 1 });
 
   return (
     <>
@@ -30,6 +32,12 @@ const QuestionTab = async ({ userId, clerkId }: props) => {
       ) : (
         <p className="text-dark100_light900">No Question has been Posted.</p>
       )}
+       <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNextQuestion}
+        />
+      </div>
     </>
   );
 };

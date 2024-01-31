@@ -79,7 +79,10 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Name <span className="text-red-700">*</span>
+                <span className="text-dark300_light700">
+                  Name
+                  <span className="text-red-700"> *</span>
+                </span>
               </FormLabel>
               <FormControl>
                 <Input
@@ -89,7 +92,9 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
                 />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                <span className="text-dark300_light700">
+                  This is your public display name.
+                </span>
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -101,7 +106,9 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Username <span className="text-red-700">*</span>
+                <span className="text-dark300_light700">
+                  Username <span className="text-red-700">*</span>
+                </span>
               </FormLabel>
               <FormControl>
                 <Input
@@ -119,7 +126,9 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Location</FormLabel>
+              <FormLabel>
+                <span className="text-dark300_light700">Location</span>
+              </FormLabel>
               <FormControl>
                 <Input
                   className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
@@ -136,7 +145,9 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
           name="portfolioWebsite"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Portfolio URL</FormLabel>
+              <FormLabel>
+                <span className="text-dark300_light700">Portfolio Website</span>
+              </FormLabel>
               <FormControl>
                 <Input
                   type="url"
@@ -154,7 +165,10 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>
+                {" "}
+                <span className="text-dark300_light700">Bio</span>
+              </FormLabel>
               <FormControl>
                 <Textarea
                   className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"

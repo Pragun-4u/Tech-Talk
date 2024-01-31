@@ -1,5 +1,6 @@
 import { SearchParamsProps } from "@/@types";
 import UserCard from "@/components/shared/Cards/UserCard/UserCard";
+import Pagination from "@/components/shared/Pagination/Pagination";
 import Filters from "@/components/shared/filters/Filters";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { UserFilters } from "@/constants/filter";
@@ -7,9 +8,10 @@ import { getAllUsers } from "@/lib/ServerActions/User.action";
 import Link from "next/link";
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
-  const { allUsers } = await getAllUsers({
+  const { allUsers, isNext } = await getAllUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
 
   return (
@@ -29,7 +31,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
 
         <Filters filter={UserFilters} />
       </div>
-      <section className="mt-12 flex flex-wrap gap-4">
+      <section className="mt-12 flex flex-wrap justify-around gap-4">
         {allUsers.length > 0 ? (
           allUsers.map((user) => (
             <UserCard key={user.name} user={user}></UserCard>
@@ -43,6 +45,12 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
           </div>
         )}
       </section>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
+      </div>
     </>
   );
 };

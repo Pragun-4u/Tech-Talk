@@ -38,8 +38,9 @@ export async function getTags(params: GetAllTagsParams) {
   try {
     ConnectToDB();
 
-    const { searchQuery, filter } = params;
+    const { searchQuery, filter, page = 1, pageSize = 5 } = params;
 
+    const skipAmount = (page - 1) * pageSize;
     const query: FilterQuery<typeof Tag> = {};
 
     if (searchQuery) {
@@ -66,13 +67,19 @@ export async function getTags(params: GetAllTagsParams) {
         break;
     }
 
-    const tag = await Tag.find(query).sort(sortOptions);
+    const allTags = await Tag.find(query)
+      .sort(sortOptions)
+      .skip(skipAmount)
+      .limit(pageSize);
 
-    if (!tag) throw new Error("No User found");
+    if (!allTags) throw new Error("No Tag found");
 
     // console.log(tag);
 
-    return tag;
+    const totalTags = await Tag.countDocuments(query);
+    const isNext = totalTags > skipAmount + allTags.length;
+
+    return { allTags, isNext };
   } catch (error) {
     console.log(error);
     throw error;
@@ -83,7 +90,9 @@ export async function getTagQuestion(params: GetQuestionsByTagIdParams) {
   try {
     ConnectToDB();
 
-    const { tagId, searchQuery } = params;
+    const { tagId, searchQuery, page=1,pageSize=2 } = params;
+
+    const skipAmount = (page - 1) * pageSize;
 
     const tagFilter: FilterQuery<ITag> = { _id: tagId };
 
@@ -95,6 +104,8 @@ export async function getTagQuestion(params: GetQuestionsByTagIdParams) {
         : {},
       options: {
         sort: { createdAt: -1 },
+        skip:skipAmount,
+        limit:pageSize
       },
       populate: [
         { path: "tags", model: Tag, select: "_id name" },
@@ -106,9 +117,10 @@ export async function getTagQuestion(params: GetQuestionsByTagIdParams) {
       throw new Error("Tag not found");
     }
 
+    const isNext=tag.question.length >=pageSize;
     const questions = tag.question;
 
-    return { tagTitle: tag.name, questions };
+    return { tagTitle: tag.name, questions,isNext };
   } catch (error) {
     console.log(error);
     throw error;

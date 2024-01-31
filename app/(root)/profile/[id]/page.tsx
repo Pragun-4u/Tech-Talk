@@ -10,8 +10,10 @@ import ProfilePageLink from "@/components/shared/ProfilePage/ProfilePageLink";
 import Stats from "@/components/shared/Stats/Stats";
 import QuestionTab from "@/components/shared/Cards/Question/QuestionTab";
 import AnswerTab from "@/components/shared/Cards/AnswerCard/AnswerTab";
+import { useSearchParams } from "next/navigation";
 
-const Page = async ({ params }: any) => {
+const Page = async ({ params, searchParams }: any) => {
+  // const searchParams=useSearchParams();
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 
@@ -92,12 +94,14 @@ const Page = async ({ params }: any) => {
           </TabsList>
           <TabsContent value="top-posts">
             <QuestionTab
+              searchParams={searchParams}
               userId={userInfo.user._id}
               clerkId={userInfo.user.clerkId}
             />
           </TabsContent>
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
             <AnswerTab
+              searchParams={searchParams}
               userId={userInfo.user._id}
               clerkId={userInfo.user.clerkId}
             />

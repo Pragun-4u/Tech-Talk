@@ -1,5 +1,6 @@
 import { SearchParamsProps } from "@/@types";
 import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
+import Pagination from "@/components/shared/Pagination/Pagination";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
@@ -12,10 +13,11 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
 
   if (!userId) return null;
   //  @ts-ignore
-  const { allQuestions } = await getAllSavedQuestion({
+  const { allQuestions, isNext } = await getAllSavedQuestion({
     clerkId: userId,
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
   });
 
   return (
@@ -59,6 +61,12 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
             path="/"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );

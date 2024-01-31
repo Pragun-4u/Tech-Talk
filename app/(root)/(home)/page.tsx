@@ -1,6 +1,7 @@
 // "use client";
 import { SearchParamsProps } from "@/@types";
 import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
+import Pagination from "@/components/shared/Pagination/Pagination";
 import Filters from "@/components/shared/filters/Filters";
 import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
@@ -10,9 +11,10 @@ import { getQuestions } from "@/lib/ServerActions/Question.action";
 import Link from "next/link";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { allQuestions } = await getQuestions({
+  const { allQuestions, isNext } = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams?.page ? +searchParams.page : 1,
   });
 
   return (
@@ -62,6 +64,12 @@ export default async function Home({ searchParams }: SearchParamsProps) {
             path="/ask-question"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );

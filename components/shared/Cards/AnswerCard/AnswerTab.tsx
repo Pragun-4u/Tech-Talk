@@ -1,14 +1,19 @@
 import { getAllAnswersbyUser } from "@/lib/ServerActions/User.action";
 import React from "react";
 import AnswerCard from "./AnswerCard";
+import { SearchParamsProps } from "@/@types";
+import Pagination from "../../Pagination/Pagination";
 
-interface Props {
+interface Props extends SearchParamsProps {
   userId: string;
   clerkId?: string | null;
 }
 
-const AnswerTab = async ({ userId, clerkId }: Props) => {
-  const result = await getAllAnswersbyUser({ userId });
+const AnswerTab = async ({ userId, clerkId, searchParams }: Props) => {
+  const result = await getAllAnswersbyUser({
+    userId,
+    page: searchParams?.page ? +searchParams.page : 1,
+  });
 
   return (
     <>
@@ -27,6 +32,12 @@ const AnswerTab = async ({ userId, clerkId }: Props) => {
       ) : (
         <p className="text-dark300_light900">No Answers Posted</p>
       )}
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNextAnswer}
+        />
+      </div>
     </>
   );
 };

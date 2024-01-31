@@ -42,7 +42,7 @@ export interface JobFilterParams {
   page: string;
 }
 export interface GetQuestionsParams {
-  page?: number;
+  page: number;
   pageSize?: number;
   searchQuery?: string;
   filter?: string;
@@ -101,7 +101,7 @@ export interface GetUserByIdParams {
   userId: string;
 }
 export interface GetAllUsersParams {
-  page?: number;
+  page: number;
   pageSize?: number;
   filter?: string;
   searchQuery?: string; // Add searchQuery parameter
@@ -118,7 +118,7 @@ export interface ToggleSaveQuestionParams {
 }
 export interface GetSavedQuestionsParams {
   clerkId: string;
-  page?: number;
+  page: number;
   pageSize?: number;
   filter?: string;
   searchQuery?: string;

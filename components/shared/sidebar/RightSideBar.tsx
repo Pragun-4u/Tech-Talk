@@ -9,8 +9,6 @@ const RightSideBar = async () => {
   const topQuestions = await getTopQuestions();
   const topTags = await getTopTags();
 
-  console.log({ topTags });
-
   return (
     <div className="background-light900_dark200 light-border custom-scrollbar sticky right-0 top-0 flex h-screen w-[350px] flex-col overflow-y-hidden border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden lg:block">
       <div className="-mt-6 flex flex-col">

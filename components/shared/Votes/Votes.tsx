@@ -142,7 +142,7 @@ const Votes = ({
           </div>
         </div>
       </div>
-      <Image
+      {type !== "Answer" && <Image
         src={
           hasSaved
             ? "/assets/icons/star-filled.svg"
@@ -153,7 +153,7 @@ const Votes = ({
         onClick={() => HandleSave()}
         height={20}
         className="cursor-pointer"
-      />
+      />}
     </div>
   );
 };

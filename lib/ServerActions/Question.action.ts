@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 "use server";
 
-import Question from "@/database/Question.model";
+import Question, { QuestionSchema } from "@/database/Question.model";
 import { ConnectToDB } from "../Database/Mongoose";
 import Tag from "@/database/Tag.model";
 import {
@@ -22,7 +22,11 @@ export async function getQuestions(params: GetQuestionsParams) {
   try {
     ConnectToDB();
 
-    const { searchQuery, filter } = params;
+    const { searchQuery, filter, page, pageSize = 2 } = params;
+
+    // skip the amount of questions
+
+    const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof Question> = {};
 
@@ -53,9 +57,14 @@ export async function getQuestions(params: GetQuestionsParams) {
     const allQuestions = await Question.find(query)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
+      .skip(skipAmount)
+      .limit(pageSize)
       .sort(sortOptions);
 
-    return { allQuestions };
+    const totalQuestions = await Question.countDocuments(query);
+    const isNext = totalQuestions > skipAmount + allQuestions.length;
+
+    return { allQuestions, isNext };
   } catch (error) {
     console.log(error);
     throw error;

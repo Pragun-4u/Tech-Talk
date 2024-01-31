@@ -18,7 +18,6 @@ const EditDeleteAction = ({ type, itemId, clerkId }: Props) => {
 
   const handleDelete = async () => {
     if (type === "Question") {
-      console.log("Button clicked");
       await deleteQuestion({
         questionId: JSON.parse(itemId),
         path: `/profile/${clerkId}`,
