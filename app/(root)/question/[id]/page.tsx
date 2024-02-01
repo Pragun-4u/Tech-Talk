@@ -30,7 +30,7 @@ const Page = async ({
     mongoUser = await getUserID({ userId: clerkId });
   }
 
-  console.log({ mongoUser });
+  // console.log({ question }, "From page.tsx");
 
   return (
     <>
@@ -128,6 +128,7 @@ const Page = async ({
         </p>
       ) : (
         <Answer
+          question={JSON.stringify(question)}
           authorId={JSON.stringify(mongoUser?._id)}
           questionID={JSON.stringify(params.id)}
         />

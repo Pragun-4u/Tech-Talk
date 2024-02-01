@@ -22,13 +22,16 @@ import { z } from "zod";
 const Answer = ({
   authorId,
   questionID,
+  question,
 }: {
+  question: string;
   questionID: string;
   authorId: string;
 }) => {
   const { mode } = useTheme();
   const pathname = usePathname();
   const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSubmittingAI, setisSubmittingAI] = useState(false);
   const editorRef = useRef(null);
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),
@@ -36,6 +39,8 @@ const Answer = ({
       answer: "",
     },
   });
+
+  const questionParsed = JSON.parse(question);
 
   const HandleAnswerSubmit = async (value: z.infer<typeof AnswerSchema>) => {
     setisSubmitting(true);
@@ -60,15 +65,42 @@ const Answer = ({
     }
   };
 
+  const GenerateAIAnswer = async () => {
+    if (!authorId) return;
+    setisSubmittingAI(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/AI`, {
+        method: "POST",
+        body: JSON.stringify({ questionParsed }),
+      });
+
+      const AnswerAI = await res.json();
+
+      // console.log(AnswerAI, "AnswerAI");
+      const formattedAnswer = AnswerAI.reply.replace(/\n/g, "<br />");
+
+      if (editorRef.current) {
+        const editor = editorRef.current as any;
+        const currentContent = editor.getContent();
+        editor.setContent(`${currentContent} ${formattedAnswer}`);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setisSubmittingAI(false);
+    }
+  };
+
   return (
     <>
       <div className="mt-6 flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
-        {/* <h4 className="paragraph-semibold text-dark400_light800">
+        <h4 className="paragraph-semibold text-dark400_light800">
           Write your Answer here
-        </h4> */}
+        </h4>
         <Button
+          disabled={isSubmittingAI}
           className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-100 "
-          onClick={() => {}}
+          onClick={GenerateAIAnswer}
         >
           {" "}
           <Image
@@ -78,7 +110,9 @@ const Answer = ({
             alt="star"
             className="object-contain"
           />{" "}
-          Generate an AI Answer
+          {isSubmittingAI
+            ? "Generating an AI answer..."
+            : "Generate an AI Answer"}
         </Button>
       </div>
       <Form {...form}>
