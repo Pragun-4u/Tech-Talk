@@ -3,7 +3,7 @@ import { toast } from "@/components/ui/use-toast";
 import { deleteAnswer } from "@/lib/ServerActions/Answer.action";
 import { deleteQuestion } from "@/lib/ServerActions/Question.action";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface Props {
   type: string;

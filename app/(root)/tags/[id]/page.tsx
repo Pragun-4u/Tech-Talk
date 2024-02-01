@@ -5,7 +5,6 @@ import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { getTagQuestion } from "@/lib/ServerActions/Tags.action";
 import React from "react";
-import Loading from "./loading";
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const result = await getTagQuestion({
@@ -13,8 +12,6 @@ const Page = async ({ params, searchParams }: URLProps) => {
     page: searchParams?.page ? +searchParams.page : 1,
     searchQuery: searchParams.q,
   });
-
-  // if (true) return <Loading />;
 
   return (
     <>
