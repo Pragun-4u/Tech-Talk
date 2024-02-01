@@ -5,8 +5,15 @@ import NoResults from "@/components/shared/noresults/NoResults";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { TagFilters } from "@/constants/filter";
 import { getTags } from "@/lib/ServerActions/Tags.action";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Tags | Tech Talk",
+  description:
+    "Explore the latest in programming at Tech Talk, your go-to community for asking and answering coding questions. Join a global network of developers, collaborate on projects, and enhance your coding skills. Dive into a world of knowledge sharing and problem-solving with Tech Talk!",
+};
 
 const Tag = async ({ searchParams }: SearchParamsProps) => {
   const { allTags, isNext } = await getTags({

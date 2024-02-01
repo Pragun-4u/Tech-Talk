@@ -10,6 +10,14 @@ import { HomePageFilters } from "@/constants/filter";
 import { getQuestions } from "@/lib/ServerActions/Question.action";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Tech Talk",
+  description:
+    "Explore the latest in programming at Tech Talk, your go-to community for asking and answering coding questions. Join a global network of developers, collaborate on projects, and enhance your coding skills. Dive into a world of knowledge sharing and problem-solving with Tech Talk!",
+};
+
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { allQuestions, isNext } = await getQuestions({
     searchQuery: searchParams.q,

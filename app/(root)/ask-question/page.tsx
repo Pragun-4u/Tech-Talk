@@ -3,6 +3,13 @@ import { getUserID } from "@/lib/ServerActions/User.action";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ask Question | Tech Talk",
+  description:
+    "Explore the latest in programming at Tech Talk, your go-to community for asking and answering coding questions. Join a global network of developers, collaborate on projects, and enhance your coding skills. Dive into a world of knowledge sharing and problem-solving with Tech Talk!",
+};
 
 const Page = async () => {
   const { userId } = auth();

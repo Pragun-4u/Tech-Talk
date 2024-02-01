@@ -20,7 +20,8 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Tech Talk",
   description:
-    "A Community driven Platform for asking and answering Programming questions. Get Help, Collaborate and Share Knowledge with different developers from all around the world.",
+    "Tech Talk, by Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!",
+
   icons: {
     icon: "/app/Bird-logo.svg",
   },
@@ -33,6 +34,34 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>Tech Talk | By Pragun</title>
+      <meta name="title" content="Tech Talk | By Pragun" />
+      <meta
+        name="description"
+        content=" Tech Talk, By Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!
+"
+      />
+
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://techtalk.pragun.cloud" />
+      <meta property="og:title" content="Tech Talk | By Pragun" />
+      <meta
+        property="og:description"
+        content=" Tech Talk, By Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!
+"
+      />
+      <meta property="og:image" content="https://postimg.cc/0bV5Bh11" />
+
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content="https://techtalk.pragun.cloud" />
+      <meta property="twitter:title" content="Tech Talk | By Pragun" />
+      <meta
+        property="twitter:description"
+        content=" Tech Talk, By Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!
+"
+      />
+      <meta property="twitter:image" content="https://postimg.cc/0bV5Bh11" />
+
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
         <ClerkProvider
           appearance={{
