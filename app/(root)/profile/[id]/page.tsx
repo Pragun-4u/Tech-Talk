@@ -12,7 +12,6 @@ import QuestionTab from "@/components/shared/Cards/Question/QuestionTab";
 import AnswerTab from "@/components/shared/Cards/AnswerCard/AnswerTab";
 
 const Page = async ({ params, searchParams }: any) => {
-  // const searchParams=useSearchParams();
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
 

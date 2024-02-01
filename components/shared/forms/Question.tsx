@@ -26,6 +26,7 @@ import {
 } from "@/lib/ServerActions/Question.action";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
+import { toast } from "@/components/ui/use-toast";
 
 interface Props {
   mongoUserId: string;
@@ -71,8 +72,10 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           path: pathname,
         });
 
-        alert("Question Edited.");
-
+        toast({
+          title: `Question Edited Successfully`,
+          variant: "default",
+        });
         router.push(`/question/${parsedQuestionDetails._id}`); // check "/questions/$q.id"
       } else {
         await createQuestion({
@@ -83,7 +86,10 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           path: pathname,
         });
 
-        alert("Question Submitted.");
+        toast({
+          title: `Question Submitted Successfully`,
+          variant: "default",
+        });
 
         // navigate to home Page
 
@@ -91,6 +97,10 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
       }
     } catch (error) {
       console.log(error);
+      toast({
+        title: `Question Action failed`,
+        variant: "destructive",
+      });
     } finally {
       setisSubmitting(false);
     }

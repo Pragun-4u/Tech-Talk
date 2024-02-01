@@ -8,6 +8,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
 import { useTheme } from "@/context/ThemeProvider";
 import { createAnswer } from "@/lib/ServerActions/Answer.action";
 import { AnswerSchema } from "@/lib/zodValidation";
@@ -58,9 +59,17 @@ const Answer = ({
         const editor = editorRef.current as any;
         editor.setContent("");
       }
+      toast({
+        title: `Answer Submitted Successfully`,
+        variant: "default",
+      });
     } catch (error) {
+      console.log(error);
+      toast({
+        title: `Answer Submission Failed`,
+        variant: "destructive",
+      });
     } finally {
-      alert("Answer Submitted");
       setisSubmitting(false);
     }
   };
@@ -84,8 +93,16 @@ const Answer = ({
         const currentContent = editor.getContent();
         editor.setContent(`${currentContent} ${formattedAnswer}`);
       }
+      toast({
+        title: `AI Answered this Question Successfully`,
+        variant: "default",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: `AI Answer Failed`,
+        variant: "destructive",
+      });
     } finally {
       setisSubmittingAI(false);
     }

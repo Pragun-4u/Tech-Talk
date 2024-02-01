@@ -1,8 +1,9 @@
 "use client";
+import { toast } from "@/components/ui/use-toast";
 import { deleteAnswer } from "@/lib/ServerActions/Answer.action";
 import { deleteQuestion } from "@/lib/ServerActions/Question.action";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 interface Props {
   type: string;
@@ -22,10 +23,18 @@ const EditDeleteAction = ({ type, itemId, clerkId }: Props) => {
         questionId: JSON.parse(itemId),
         path: `/profile/${clerkId}`,
       });
+      toast({
+        title: `Question Deleted Successfully`,
+        variant: "default",
+      });
     } else if (type === "Answer") {
       await deleteAnswer({
         answerId: JSON.parse(itemId),
         path: `/profile/${clerkId}`,
+      });
+      toast({
+        title: `Answer Deleted Successfully`,
+        variant: "default",
       });
     }
   };

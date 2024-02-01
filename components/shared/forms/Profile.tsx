@@ -19,6 +19,7 @@ import { useState } from "react";
 import { ProfileSchema } from "@/lib/zodValidation";
 import { updatedUser } from "@/lib/ServerActions/User.action";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 interface Props {
   mongoUser: string;
@@ -60,8 +61,16 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
         path: pathname,
       });
       router.back();
+      return toast({
+        title: `Profile Updated Successfully`,
+        variant: "default",
+      });
     } catch (error) {
       console.log(error);
+      return toast({
+        title: `Profile Update Failed`,
+        variant: "destructive",
+      });
     } finally {
       setisSubmitting(false);
     }

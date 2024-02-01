@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "@/components/ui/use-toast";
 import {
   downvoteAnswer,
   upvoteAnswer,
@@ -41,17 +42,27 @@ const Votes = ({
 
   const HandleSave = async () => {
     if (!userId) {
-      return;
+      return toast({
+        title: "Please Log In",
+        description: "You must be logged In to perform this action.",
+      });
     }
     await toggleSaveQuestion({
       userId: JSON.parse(userId),
       questionId: JSON.parse(itemId),
       path: pathname,
     });
+    return toast({
+      title: `Saved ${!hasSaved ? "Successful" : "Removed"}`,
+      variant: !hasSaved ? "default" : "destructive",
+    });
   };
   const HandleVote = async (action: string) => {
     if (!userId) {
-      return;
+      return toast({
+        title: "Please Log In",
+        description: "You must be logged In to perform this action.",
+      });
     }
 
     if (action === "DownVote") {
@@ -72,6 +83,10 @@ const Votes = ({
           path: pathname,
         });
       }
+      return toast({
+        title: `DownVote ${!hasdownVoted ? "Successful" : "Removed"}`,
+        variant: !hasdownVoted ? "default" : "destructive",
+      });
     }
     if (action === "UpVote") {
       if (type === "Question") {
@@ -91,6 +106,10 @@ const Votes = ({
           path: pathname,
         });
       }
+      return toast({
+        title: `Upvote ${!hasupVoted ? "Successful" : "Removed"}`,
+        variant: !hasupVoted ? "default" : "destructive",
+      });
     }
   };
 

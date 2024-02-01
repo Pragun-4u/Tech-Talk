@@ -180,20 +180,22 @@ export async function deleteAnswer(params: DeleteAnswerParams) {
 
     const { answerId, path } = params;
 
+    console.log({ answerId });
+
     const answer = await Answer.findById(answerId);
 
+    console.log({ answer });
     if (!answer) {
       throw new Error("no answer found");
     }
 
-    await Answer.deleteOne({ _id: answerId });
+    await Answer.deleteOne({ _id: answer._id });
     await Question.updateMany(
       { _id: answer._id },
-      { $pull: { answer: answerId } }
+      { $pull: { answers: answerId } }
     );
     await Interaction.deleteMany({ answer: answerId });
 
-    alert("deleted");
     revalidatePath(path);
   } catch (error) {
     console.log(error);
