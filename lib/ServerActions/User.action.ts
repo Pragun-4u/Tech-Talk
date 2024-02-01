@@ -205,7 +205,7 @@ export async function getUserInfo(UserData: GetUserByIdParams) {
       },
       {
         type: "TOTAL_VIEWS" as BadgeCriteriaType,
-        count: questionUpvotes?.totalViews || 0,
+        count: questionViews?.totalViews || 0,
       },
     ];
 
