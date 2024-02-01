@@ -10,6 +10,7 @@ import {
 import { revalidatePath } from "next/cache";
 import Question from "@/database/Question.model";
 import Interaction from "@/database/Interaction.model";
+import User from "@/database/User.model";
 
 export async function createAnswer(params: CreateAnswerParams) {
   try {
@@ -24,7 +25,17 @@ export async function createAnswer(params: CreateAnswerParams) {
       { $push: { answers: answer } }
     );
 
-    specificQuestion.answers.push(answer);
+    // specificQuestion.answers.push(answer);
+
+    await Interaction.create({
+      action: "answer",
+      tags: specificQuestion.tags,
+      question,
+      answer: answer._id,
+      user: author,
+    });
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
 
     revalidatePath(path);
   } catch (error) {
@@ -107,6 +118,16 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
     if (!answer) {
       throw new Error("no Answer exists");
     }
+
+    console.log({ userId });
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasupVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasupVoted ? -10 : 10 },
+    });
+
     revalidatePath(path);
   } catch (error) {
     console.log(error);
@@ -139,6 +160,13 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     if (!answer) {
       throw new Error("no Answer exists");
     }
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
+    });
     revalidatePath(path);
   } catch (error) {
     console.log(error);

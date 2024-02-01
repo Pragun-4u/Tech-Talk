@@ -37,6 +37,7 @@ const Votes = ({
 }: props) => {
   const pathname = usePathname();
   const router = useRouter();
+  // console.log({ userId }, "From Votes");
 
   const HandleSave = async () => {
     if (!userId) {
@@ -142,18 +143,20 @@ const Votes = ({
           </div>
         </div>
       </div>
-      {type !== "Answer" && <Image
-        src={
-          hasSaved
-            ? "/assets/icons/star-filled.svg"
-            : "/assets/icons/star-red.svg"
-        }
-        alt="save"
-        width={20}
-        onClick={() => HandleSave()}
-        height={20}
-        className="cursor-pointer"
-      />}
+      {type !== "Answer" && (
+        <Image
+          src={
+            hasSaved
+              ? "/assets/icons/star-filled.svg"
+              : "/assets/icons/star-red.svg"
+          }
+          alt="save"
+          width={20}
+          onClick={() => HandleSave()}
+          height={20}
+          className="cursor-pointer"
+        />
+      )}
     </div>
   );
 };
