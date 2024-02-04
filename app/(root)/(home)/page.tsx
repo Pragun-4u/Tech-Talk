@@ -28,16 +28,18 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Questions</h1>
+        <h1 className="h1-bold text-start text-dark100_light900">
+          All Questions
+        </h1>
 
-        <Link className="  flex justify-end max-sm:w-full" href="/ask-question">
-          <Button className="primary-gradient min-h-[48px] w-full px-4 py-3 text-light-900">
+        <Link className="flex  justify-end max-sm:w-full" href="/ask-question">
+          <Button className="w-full primary-gradient min-h-[48px]  px-4 py-3 text-light-900">
             Ask a Question here.
           </Button>
         </Link>
       </div>
 
-      <div className="mt-4 gap-5  max-sm:flex-col sm:items-center md:mt-11">
+      <div className="mt-4 gap-5 w-fit md:w-full  max-sm:flex-col sm:items-center md:mt-11">
         <LocalSearchbar
           route="/"
           iconPosition="left"

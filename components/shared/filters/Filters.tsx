@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -78,16 +79,19 @@ const Filters = ({ filter, otherClasses, containerClasses }: Props) => {
           >
             <SelectValue placeholder="Select a Filter" />
           </SelectTrigger>
-          <SelectContent>
-            {filter.map((filter) => (
-              <SelectItem
-                onClick={() => HandleFilterClick(filter.name)}
-                key={filter.value}
-                value={filter.value.toString()}
-              >
-                {filter.name}
-              </SelectItem>
-            ))}
+          <SelectContent className="text-dark500_light700 small-regular border-none bg-light-900 dark:bg-dark-300">
+            <SelectGroup>
+              {filter.map((filter) => (
+                <SelectItem
+                  onClick={() => HandleFilterClick(filter.name)}
+                  key={filter.value}
+                  className="focus:bg-light-800 dark:focus:bg-dark-400"
+                  value={filter.value.toString()}
+                >
+                  {filter.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
           </SelectContent>
         </Select>
       </div>

@@ -21,14 +21,14 @@ const QuestionCard = ({
   const showActionBtn = clerkId && clerkId === author.clerkId;
 
   return (
-    <div className="card-wrapper my-2 text-clip rounded-[10x] p-9 sm:px-11">
+    <div className="card-wrapper  my-2 text-clip rounded-[10x] p-5 md:p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
             {getTimeStamps(createdAt)}
           </span>
           <Link href={`/question/${_id}`}>
-            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-2 flex-1">
+            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-3 flex-1">
               {title}
             </h3>
           </Link>
@@ -43,7 +43,7 @@ const QuestionCard = ({
           )}
         </SignedIn>
       </div>
-      <div className="mt-3.5 flex  gap-1">
+      <div className="mt-3.5 flex flex-wrap flex-row gap-1">
         {tags.map((tag) => (
           <Tags key={tag._id} _id={tag._id} value={tag.name} />
         ))}
@@ -58,27 +58,29 @@ const QuestionCard = ({
           isAuthor
           textStyles="body-medium text-dark400_Light800"
         />
-        <Metric
-          imgUrl="/assets/icons/like.svg"
-          value={formatNumber(upvotes)}
-          alt="upvotes"
-          title=" Votes"
-          textStyles="small_medium text-dark400_Light800"
-        />
-        <Metric
-          imgUrl="/assets/icons/message.svg"
-          value={formatNumber(answer)}
-          alt="answers"
-          title=" Answers"
-          textStyles="small_medium text-dark400_Light800"
-        />
-        <Metric
-          imgUrl="/assets/icons/eye.svg"
-          value={formatNumber(views)}
-          alt="eye"
-          title=" Views"
-          textStyles="small_medium text-dark400_Light800"
-        />
+        <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
+          <Metric
+            imgUrl="/assets/icons/like.svg"
+            value={formatNumber(upvotes)}
+            alt="upvotes"
+            title=" Votes"
+            textStyles="small_medium text-dark400_Light800"
+          />
+          <Metric
+            imgUrl="/assets/icons/message.svg"
+            value={formatNumber(answer)}
+            alt="answers"
+            title=" Answers"
+            textStyles="small_medium text-dark400_Light800"
+          />
+          <Metric
+            imgUrl="/assets/icons/eye.svg"
+            value={formatNumber(views)}
+            alt="eye"
+            title=" Views"
+            textStyles="small_medium text-dark400_Light800"
+          />
+        </div>
       </div>
     </div>
   );

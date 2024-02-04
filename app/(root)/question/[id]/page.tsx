@@ -115,7 +115,7 @@ const Page = async ({
       />
 
       {!clerkId ? (
-        <p className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
+        <p className="paragraph-regular text-dark200_light800 my-5 mx-auto max-w-4xl text-center">
           Know a better answer?{" "}
           <Link href={`/sign-up`}>
             <span className="text-orange-500">Sign-up </span>

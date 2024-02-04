@@ -19,7 +19,7 @@ const Tags = ({
 }: Props) => {
   return (
     <Link
-      className={`mx-4  ${otherClasses} flex  items-center justify-between gap-4 `}
+      className={`mx-4  ${otherClasses} flex items-center justify-between gap-4 `}
       href={"/tags/" + _id}
     >
       <Badge className="background-light700_dark300 subtle-medium text-dark400_light900 my-2 rounded-lg p-2 px-3 uppercase">
