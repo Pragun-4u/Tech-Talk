@@ -78,7 +78,10 @@ const MobileNav = () => {
           className={`sm:hidden ${mode === "light" ? "invert" : ""}`}
         />
       </SheetTrigger>
-      <SheetContent side={"left"} className="overflow-scroll">
+      <SheetContent
+        side={"left"}
+        className="background-light900_dark200 overflow-scroll"
+      >
         <Link href="/" className="flex items-center gap-1">
           <Image
             src="assets/images/Hero-logo.svg"
@@ -90,9 +93,7 @@ const MobileNav = () => {
             Tech <span className="text-primary-500">Talk</span>
           </p>
         </Link>
-        <SheetClose asChild>
-          <NavItems />
-        </SheetClose>
+        <NavItems />
         <SignedOut>
           <div className="-mt-28 flex flex-col gap-5 md:pt-10 ">
             <SheetClose asChild>

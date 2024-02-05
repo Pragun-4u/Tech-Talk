@@ -39,7 +39,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
         </Link>
       </div>
 
-      <div className="mt-4 gap-5 w-fit md:w-full  max-sm:flex-col sm:items-center md:mt-11">
+      <div className="mt-4 gap-5 w-full md:w-full  max-sm:flex-col sm:items-center md:mt-11">
         <LocalSearchbar
           route="/"
           iconPosition="left"

@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const LeftSideBar = () => {
   return (
-    <div className="sticky left-0 top-0 hidden h-[100vh] overflow-hidden  pt-12 md:block md:w-20 lg:w-64">
+    <div className="background-light890_dark200 sticky left-0 top-0 hidden h-[100vh] overflow-hidden  pt-12 md:block md:w-20 lg:w-64">
       <Sheet>
         <NavItems />
         <SignedOut>
