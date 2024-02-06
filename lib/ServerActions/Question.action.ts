@@ -11,6 +11,7 @@ import {
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
+  RecommendedParams,
 } from "./shared.types";
 import User from "@/database/User.model";
 import { revalidatePath } from "next/cache";
@@ -274,6 +275,59 @@ export async function editQuestion(params: EditQuestionParams) {
     await question.save();
 
     revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+export async function getRecommendedQuestions(params: RecommendedParams) {
+  try {
+    ConnectToDB();
+
+    const { userId, page = 1, pageSize = 2, searchQuery } = params;
+    const user = await User.findOne({ clerkId: userId });
+    if (!user) {
+      throw new Error("No User Found");
+    }
+    const skipAmount = (page - 1) * pageSize;
+
+    const userInteractions = await Interaction.find({ user: user._id })
+      .populate("tags")
+      .exec();
+
+    const userTags = userInteractions.reduce((tags, interaction) => {
+      if (interaction.tags) {
+        tags = tags.concat(interaction.tags);
+      }
+      return tags;
+    }, []);
+
+    // @ts-ignore
+    const distinctUserTagIds = [...new Set(userTags.map((tag) => tag._id))];
+
+    const query: FilterQuery<typeof Question> = {
+      $and: [
+        { tags: { $in: distinctUserTagIds } },
+        { author: { $ne: user._id } }, // Exclude User's own Questions.
+      ],
+    };
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: searchQuery, $options: "i" } },
+        { description: { $regex: searchQuery, $options: "i" } },
+      ];
+    }
+    const recommendedQuestions = await Question.find(query)
+      .populate({ path: "tags", model: Tag })
+      .populate({ path: "author", model: User })
+      .skip(skipAmount)
+      .limit(pageSize);
+
+    const totalQuestions = await Question.countDocuments(query);
+    const isNext = totalQuestions > skipAmount + recommendedQuestions.length;
+
+    return { questions: recommendedQuestions, isNext };
   } catch (error) {
     console.log(error);
     throw error;

@@ -18,19 +18,21 @@ const Tags = ({
   otherClasses,
 }: Props) => {
   return (
-    <Link
-      className={`mx-4  ${otherClasses} flex items-center justify-between gap-4 `}
-      href={"/tags/" + _id}
-    >
-      <Badge className="background-light700_dark300 subtle-medium text-dark400_light900 my-2 rounded-lg p-2 px-3 uppercase">
-        {value}
-      </Badge>
-      {showCount && (
-        <p className="subtle-medium text-dark400_light900  px-6">
-          {totalQuestion}
-        </p>
-      )}
-    </Link>
+    <>
+      <Link
+        className={`mx-4  ${otherClasses} flex items-center justify-between gap-4 `}
+        href={"/tags/" + _id}
+      >
+        <Badge className="background-light700_dark300 subtle-medium text-dark400_light900 my-2 rounded-lg p-2 px-3 uppercase">
+          {value}
+        </Badge>
+        {showCount && (
+          <p className="subtle-medium text-dark400_light900  px-6">
+            {totalQuestion}
+          </p>
+        )}
+      </Link>
+    </>
   );
 };
 

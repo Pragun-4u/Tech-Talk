@@ -33,16 +33,16 @@ const RightSideBar = async () => {
       <div className=" mt-6 flex flex-col">
         <p className="h3-bold text-dark400_light900  px-8 pb-2">Popular Tags</p>
         {topTags?.map((tag) => (
-          <Link href={`/tags/${tag._id}`} key={tag._id}>
-            <div className="flex flex-col">
-              <Tags
-                _id={tag._id}
-                value={tag.name}
-                totalQuestion={tag.numberofQuestions}
-                showCount
-              />
-            </div>
-          </Link>
+          // <Link href={`/tags/${tag._id}`} >
+          <div className="flex flex-col" key={tag._id}>
+            <Tags
+              _id={tag._id}
+              value={tag.name}
+              totalQuestion={tag.numberofQuestions}
+              showCount
+            />
+          </div>
+          // </Link>
         ))}
       </div>
     </div>
