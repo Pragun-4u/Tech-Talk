@@ -40,16 +40,15 @@ const Tag = async ({ searchParams }: SearchParamsProps) => {
         <Filters filter={TagFilters} />
       </div>
 
-      <section className="mt-12 flex flex-wrap gap-2">
+      <section className="mt-12 flex justify-center flex-wrap gap-2">
         {allTags.length > 0 ? (
           allTags.map((tag) => (
-            // <TagsCard key={tag.name} tag={tag}></TagsCard>
             <Link
               href={`/tags/${tag._id}`}
               className="shadow-light100_darknone"
               key={tag.name}
             >
-              <article className="background-light900_dark200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
+              <article className="background-light900_dark200 light-border flex   md:w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
                 <div className="h3-bold background-light800_dark400 w-fit rounded-sm px-5 py-1.5">
                   <p className="paragraph-semibold text-dark300_light900">
                     {tag.name}
@@ -67,7 +66,7 @@ const Tag = async ({ searchParams }: SearchParamsProps) => {
         ) : (
           <NoResults
             title="Tags"
-            description="No tags here"
+            description="No tags found"
             buttontext="Ask Questions"
             path="/ask-question"
           />

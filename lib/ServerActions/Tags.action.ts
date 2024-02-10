@@ -22,12 +22,11 @@ export async function getTopInteractedTags(tags: GetTopInteractedTagsParams) {
     if (!user) throw new Error("No User found");
 
     //  find interactions for the user and grp by tags...
+    const getTagsofUser = await Question.find({ author: user._id })
+      .select("tags")
+      .populate({ path: "tags", model: Tag, select: "_id name" });
 
-    return [
-      { id: "1", name: "Tag1" },
-      { id: "2", name: "Tag2" },
-      { id: "3", name: "Tag3" },
-    ];
+    return getTagsofUser;
   } catch (error) {
     console.log(error);
     throw error;

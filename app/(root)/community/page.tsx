@@ -22,6 +22,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
     page: searchParams.page ? +searchParams.page : 1,
   });
 
+  console.log({ allUsers, isNext });
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
@@ -41,9 +42,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <section className="mt-12 flex flex-wrap justify-around gap-4">
         {allUsers.length > 0 ? (
-          allUsers.map((user) => (
-            <UserCard key={user.name} user={user}></UserCard>
-          ))
+          allUsers.map((user) => <UserCard key={user.name} user={user} />)
         ) : (
           <div className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
             <p> No users yet</p>

@@ -122,12 +122,14 @@ export async function getAllUsers(UserData: GetAllUsersParams) {
         break;
     }
 
+    console.log({ query });
+
     const allUsers = await User.find(query)
       .skip(skipAmount)
       .limit(pageSize)
       .sort(sortOptions);
 
-    const totalUsers = await Question.countDocuments(query);
+    const totalUsers = await User.countDocuments(query);
     const isNext = totalUsers > skipAmount + allUsers.length;
 
     return { allUsers, isNext };

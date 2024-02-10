@@ -77,8 +77,12 @@ const Answer = ({
   const GenerateAIAnswer = async () => {
     if (!authorId) return;
     setisSubmittingAI(true);
+    const serverURL =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_SERVER_URL
+        : process.env.NEXT_PUBLIC_LOCAL_URL;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/AI`, {
+      const res = await fetch(`${serverURL}/api/AI`, {
         method: "POST",
         body: JSON.stringify({ questionParsed }),
       });
