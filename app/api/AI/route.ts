@@ -4,8 +4,6 @@ export const POST = async (request: Request) => {
   //  @ts-ignore
   const { questionParsed } = await request.json();
 
-  console.log({ questionParsed });
-
   try {
     const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
       method: "POST",
