@@ -47,8 +47,6 @@ const Profile = ({ mongoUser, clerkId }: Props) => {
     // ✅ This will be type-safe and validated.
     setisSubmitting(true);
     try {
-      console.log("Form State:", values);
-
       await updatedUser({
         clerkId,
         updateData: {

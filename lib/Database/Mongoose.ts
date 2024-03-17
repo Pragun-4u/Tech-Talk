@@ -18,7 +18,6 @@ export async function ConnectToDB() {
       dbName: "TechTalk",
     });
     isConnected = true;
-    console.log("Mongo DB connected");
   } catch (error) {
     console.log("Mongo ERROR ", error);
   }

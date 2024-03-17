@@ -110,7 +110,6 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
     e: React.KeyboardEvent<HTMLInputElement>,
     field: any
   ) => {
-    console.log(field);
     if (e.key === "Enter" && field.name === "Tags") {
       e.preventDefault();
       if (form.getValues("Tags").length === 3) {

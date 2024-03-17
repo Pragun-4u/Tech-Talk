@@ -122,8 +122,6 @@ export async function getAllUsers(UserData: GetAllUsersParams) {
         break;
     }
 
-    console.log({ query });
-
     const allUsers = await User.find(query)
       .skip(skipAmount)
       .limit(pageSize)
@@ -318,8 +316,6 @@ export async function getAllSavedQuestion(params: GetSavedQuestionsParams) {
     if (!user) {
       throw new Error("User not found");
     }
-    console.log("user.saved.length, pageSize");
-    console.log(user.saved.length, pageSize);
 
     const isNext = user.saved.length >= pageSize;
 

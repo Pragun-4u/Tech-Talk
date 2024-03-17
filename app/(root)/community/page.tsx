@@ -22,7 +22,6 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
     page: searchParams.page ? +searchParams.page : 1,
   });
 
-  console.log({ allUsers, isNext });
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">

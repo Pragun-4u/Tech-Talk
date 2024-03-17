@@ -180,11 +180,8 @@ export async function deleteAnswer(params: DeleteAnswerParams) {
 
     const { answerId, path } = params;
 
-    console.log({ answerId });
-
     const answer = await Answer.findById(answerId);
 
-    console.log({ answer });
     if (!answer) {
       throw new Error("no answer found");
     }
