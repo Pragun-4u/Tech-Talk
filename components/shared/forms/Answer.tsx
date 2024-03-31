@@ -64,7 +64,7 @@ const Answer = ({
         variant: "default",
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({
         title: `Answer Submission Failed`,
         variant: "destructive",
@@ -77,17 +77,16 @@ const Answer = ({
   const GenerateAIAnswer = async () => {
     if (!authorId) return;
     setisSubmittingAI(true);
-    const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
+    // const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
     try {
-      const res = await fetch(`${serverURL}api/AI`, {
+      const res = await fetch(`https://techtalk.pragun.cloud/api/AI`, {
         method: "POST",
         body: JSON.stringify({ questionParsed }),
       });
 
       const AnswerAI = await res.json();
 
-      // console.log(AnswerAI, "AnswerAI");
-      const formattedAnswer = AnswerAI.reply.replace(/\n/g, "<br />");
+      const formattedAnswer = AnswerAI?.reply?.replace(/\n/g, "<br />");
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
@@ -99,7 +98,7 @@ const Answer = ({
         variant: "default",
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({
         title: `AI Answer Failed`,
         variant: "destructive",
