@@ -79,7 +79,7 @@ const Answer = ({
     setisSubmittingAI(true);
     const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
     try {
-      const res = await fetch(`${serverURL}/api/AI`, {
+      const res = await fetch(`${serverURL}api/AI`, {
         method: "POST",
         body: JSON.stringify({ questionParsed }),
       });
