@@ -92,11 +92,11 @@ const Answer = ({
         const editor = editorRef.current as any;
         const currentContent = editor.getContent();
         editor.setContent(`${currentContent} ${formattedAnswer}`);
+        toast({
+          title: `AI Answered this Question Successfully`,
+          variant: "default",
+        });
       }
-      toast({
-        title: `AI Answered this Question Successfully`,
-        variant: "default",
-      });
     } catch (error) {
       console.error(error);
       toast({
