@@ -20,6 +20,7 @@ const Navbar = () => {
             style={{
               borderRadius: "10px",
               margin: "0px 5px",
+              backgroundColor: "transparent",
             }}
           />
           <p className="h2-bold font-spaceGrotesk  text-base  text-dark-200 dark:text-white md:block md:text-2xl">
