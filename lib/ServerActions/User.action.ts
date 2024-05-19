@@ -140,11 +140,22 @@ export async function getUserInfo(UserData: GetUserByIdParams) {
   try {
     ConnectToDB();
     const { userId } = UserData;
-    const user = await User.findOne({
-      clerkId: userId,
-    }).sort({
-      createdAt: -1,
-    });
+
+    let user;
+    if (userId.startsWith("user")) {
+      user = await User.findOne({
+        clerkId: userId,
+      }).sort({
+        createdAt: -1,
+      });
+    } else {
+      user = await User.findById({
+        _id: userId,
+      }).sort({
+        createdAt: -1,
+      });
+    }
+
     if (!user) {
       throw new Error("User not found");
     }

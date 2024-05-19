@@ -38,7 +38,7 @@ const ErrorBoundaryJSX = () => {
   return (
     <img
       src="/assets/images/something-went-wrong.gif"
-      style={{ height: "100vh", width: "100vw", objectFit: "contain" }}
+      style={{ height: "100vh", width: "100vw", objectFit: "fill" }}
     />
   );
 };
