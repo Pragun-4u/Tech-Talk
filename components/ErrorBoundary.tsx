@@ -1,6 +1,5 @@
 // components/ErrorBoundary.tsx
 "use client";
-import Image from "next/image";
 import React, { Component, ReactNode, ErrorInfo } from "react";
 
 interface Props {

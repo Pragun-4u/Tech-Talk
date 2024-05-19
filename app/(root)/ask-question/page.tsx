@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { getUserID } from "@/lib/ServerActions/User.action";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import React from "react";
 import type { Metadata } from "next";
 import Loader from "@/components/Loader";
 
