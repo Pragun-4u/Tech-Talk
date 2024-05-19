@@ -10,7 +10,7 @@ export async function ConnectToDB() {
   }
 
   if (isConnected) {
-    return console.log("MongoDB already Connected");
+    return;
   }
 
   try {
