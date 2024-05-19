@@ -21,7 +21,7 @@ const UserCard = async ({ user }: props) => {
   return (
     <section className="background-light900_dark200 light-border flex  flex-col items-center justify-center rounded-2xl border p-8">
       <Link
-        href={`/profile/${user.clerkId}`}
+        href={`/profile/${user._id}`}
         className="shadow-light100_darknone w-full items-center max-xs:min-w-full xs:w-[260px]"
       >
         <Image

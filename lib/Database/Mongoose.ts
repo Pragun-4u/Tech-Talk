@@ -19,6 +19,6 @@ export async function ConnectToDB() {
     });
     isConnected = true;
   } catch (error) {
-    console.log("Mongo ERROR ", error);
+    console.error("Mongo ERROR ", error);
   }
 }

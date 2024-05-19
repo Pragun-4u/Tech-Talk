@@ -1,16 +1,14 @@
 // "use client";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import { SearchParamsProps } from "@/@types";
-import QuestionCard from "@/components/shared/Cards/Question/QuestionCard";
-import Pagination from "@/components/shared/Pagination/Pagination";
-import Filters from "@/components/shared/filters/Filters";
-import NoResults from "@/components/shared/noresults/NoResults";
-import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { Button } from "@/components/ui/button";
-import { HomePageFilters } from "@/constants/filter";
 import { getQuestions } from "@/lib/ServerActions/Question.action";
 import Link from "next/link";
 
 import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import { HomePageFilters } from "@/constants/filter";
+import Loader from "@/components/Loader";
 
 export const metadata: Metadata = {
   title: "Home | Tech Talk",
@@ -18,9 +16,23 @@ export const metadata: Metadata = {
     "Explore the latest in programming at Tech Talk, your go-to community for asking and answering coding questions. Join a global network of developers, collaborate on projects, and enhance your coding skills. Dive into a world of knowledge sharing and problem-solving with Tech Talk!",
 };
 
-export default async function Home({ searchParams }: SearchParamsProps) {
-  //  get RecommendedQuestion
+// Dynamic imports
+const QuestionCard = dynamic(
+  () => import("@/components/shared/Cards/Question/QuestionCard")
+);
+const Pagination = dynamic(
+  () => import("@/components/shared/Pagination/Pagination")
+);
+const Filters = dynamic(() => import("@/components/shared/filters/Filters"));
+const NoResults = dynamic(
+  () => import("@/components/shared/noresults/NoResults")
+);
+const LocalSearchbar = dynamic(
+  () => import("@/components/shared/search/LocalSearchbar")
+);
 
+export default async function Home({ searchParams }: SearchParamsProps) {
+  // Get RecommendedQuestion
   const { allQuestions, isNext } = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
@@ -28,20 +40,20 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   });
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <div className="flex w-full flex-col-reverse justify-between gap-4 text-center sm:flex-row sm:items-center">
         <h1 className="h1-bold text-start text-dark100_light900">
           All Questions
         </h1>
 
-        <Link className="flex  justify-end max-sm:w-full" href="/ask-question">
-          <Button className="w-full primary-gradient min-h-[48px]  px-4 py-3 text-light-900">
+        <Link className="flex justify-end max-sm:w-full" href="/ask-question">
+          <Button className="w-full primary-gradient min-h-[48px] px-4 py-3 text-light-900">
             Ask a Question here.
           </Button>
         </Link>
       </div>
 
-      <div className="mt-4 gap-5 w-full md:w-full  max-sm:flex-col sm:items-center md:mt-11">
+      <div className="mt-4 gap-5 w-full md:w-full max-sm:flex-col sm:items-center md:mt-11">
         <LocalSearchbar
           route="/"
           iconPosition="left"
@@ -83,6 +95,6 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           isNext={isNext}
         />
       </div>
-    </>
+    </Suspense>
   );
 }

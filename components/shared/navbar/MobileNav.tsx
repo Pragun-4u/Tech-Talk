@@ -84,10 +84,16 @@ const MobileNav = () => {
       >
         <Link href="/" className="flex items-center gap-1">
           <Image
-            src="assets/images/Hero-logo.svg"
-            width={32}
-            height={32}
+            src="/assets/images/TechTalkLogo.gif"
+            width={60}
+            height={60}
+            loading={"lazy"}
             alt="Tech Talk"
+            style={{
+              borderRadius: "10px",
+              margin: "0px 5px",
+              backgroundColor: "transparent",
+            }}
           />
           <p className="h2-bold  font-spaceGrotesk text-dark-200 dark:text-white ">
             Tech <span className="text-primary-500">Talk</span>

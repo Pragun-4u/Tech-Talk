@@ -119,7 +119,6 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
       throw new Error("no Answer exists");
     }
 
-    console.log({ userId });
     await User.findByIdAndUpdate(userId, {
       $inc: { reputation: hasupVoted ? -2 : 2 },
     });
