@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import "../app/globals.css";
 import "../styles/prism.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
-
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -50,7 +49,7 @@ export default function RootLayout({
         content=" Tech Talk, By Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!
 "
       />
-      <meta property="og:image" content="https://postimg.cc/0bV5Bh11" />
+      <meta property="og:image" content="./Tech-Talk-Preview.png" />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://techtalk.pragun.cloud" />
@@ -60,7 +59,7 @@ export default function RootLayout({
         content=" Tech Talk, By Pragun, is your ultimate platform for coding discussions and collaboration. Join a vibrant community of developers worldwide to ask and answer programming questions. Get expert help, collaborate on projects, and share knowledge. Dive into a world of coding excellence with Tech Talk!
 "
       />
-      <meta property="twitter:image" content="https://postimg.cc/0bV5Bh11" />
+      <meta property="twitter:image" content="./Tech-Talk-Preview.png" />
 
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
         <ClerkProvider
